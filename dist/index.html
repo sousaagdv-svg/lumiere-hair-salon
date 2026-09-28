@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière — Hair Salon & Premium Beauty</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: {
+                            DEFAULT: '#FBF9F5',
+                            50: '#FFFFFF',
+                            100: '#F9F6F0',
+                            200: '#F3EFE6',
+                            300: '#E6DFD1',
+                        },
+                        terracotta: {
+                            DEFAULT: '#C47A5C',
+                            light: '#D49275',
+                            dark: '#A65D3F',
+                        },
+                        brandBrown: '#3A3331',
+                        warmBeige: '#EFE8DE',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>.serif-heading{font-family:Cormorant Garamond,serif}:root{--ease-editorial:cubic-bezier(.16, 1, .3, 1);--ease-soft:cubic-bezier(.25, .46, .45, .94)}@keyframes fadeIn{0%{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes headerFade{0%{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}.animate-fade-in-1{animation:fadeIn .8s var(--ease-editorial) .1s both}.animate-fade-in-2{animation:fadeIn .8s var(--ease-editorial) .25s both}.animate-fade-in-3{animation:fadeIn .8s var(--ease-editorial) .4s both}.animate-fade-in-4{animation:fadeIn .8s var(--ease-editorial) .55s both}html.js [data-header-item]{opacity:0;animation:headerFade .7s var(--ease-editorial) both}html.js [data-header-item=logo]{animation-delay:50ms}html.js [data-header-item=nav]{animation-delay:.2s}html.js [data-header-item=cta]{animation-delay:.32s}html.js .site-nav a{opacity:0;animation:headerFade .6s var(--ease-editorial) both}html.js .site-nav a:first-child{animation-delay:.24s}html.js .site-nav a:nth-child(2){animation-delay:.3s}html.js .site-nav a:nth-child(3){animation-delay:.36s}html.js .site-nav a:nth-child(4){animation-delay:.42s}html.js .site-nav a:nth-child(5){animation-delay:.48s}html.js .site-nav a:nth-child(6){animation-delay:.54s}html.js [data-reveal]{opacity:0;transform:translate3d(0, var(--rv-y,18px), 0);transition:opacity var(--rv-dur,.9s) var(--ease-editorial) var(--rv-delay,0s), transform var(--rv-dur,.9s) var(--ease-editorial) var(--rv-delay,0s);will-change:opacity, transform}html.js [data-reveal=label]{--rv-y:12px;--rv-dur:.75s}html.js [data-reveal=title]{--rv-y:22px;--rv-dur:1s}html.js [data-reveal=text]{--rv-y:15px;--rv-dur:.85s}html.js [data-reveal=cta]{--rv-y:12px;--rv-dur:.75s}html.js [data-reveal=card]{--rv-y:26px;--rv-dur:.9s}html.js [data-reveal=image]{--rv-y:20px;--rv-dur:1.1s;--rv-scale:.975}html.js [data-reveal=form]{--rv-y:25px;--rv-dur:1s}html.js [data-reveal=image],html.js [data-reveal=form]{transform:translate3d(0, var(--rv-y), 0) scale(var(--rv-scale,.98))}html.js [data-reveal].is-revealed{opacity:1;will-change:auto;transform:translate(0,0)scale(1)}html.js [data-d="1"]{--rv-delay:80ms}html.js [data-d="2"]{--rv-delay:.16s}html.js [data-d="3"]{--rv-delay:.24s}html.js [data-d="4"]{--rv-delay:.32s}html.js [data-d="5"]{--rv-delay:.4s}html.js [data-d="6"]{--rv-delay:.48s}html.js [data-d="7"]{--rv-delay:.56s}html.js [data-d="8"]{--rv-delay:.64s}.btn-motion{transition:transform .4s var(--ease-soft), background-color .4s var(--ease-soft), box-shadow .4s var(--ease-soft), color .4s var(--ease-soft);will-change:transform}.btn-motion:hover{transform:translateY(-2px)}.btn-motion:active{transform:translateY(0)}.btn-motion .icon-arrow{transition:transform .4s var(--ease-soft);display:inline-block}.btn-motion:hover .icon-arrow{transform:translate(4px)}.link-editorial{transition:color .4s var(--ease-soft);display:inline-block;position:relative}.link-editorial:after{content:"";opacity:.35;transform-origin:100%;width:100%;height:1px;transition:transform .5s var(--ease-editorial);background:currentColor;position:absolute;bottom:-3px;left:0;transform:scaleX(0)}.link-editorial:hover:after,.link-editorial:focus-visible:after{transform-origin:0;opacity:.9;transform:scaleX(1)}.card-motion{transition:transform .6s var(--ease-editorial), box-shadow .6s var(--ease-editorial), border-color .6s var(--ease-editorial);will-change:transform}.card-motion:hover{border-color:#c47a5c66;transform:translateY(-8px);box-shadow:0 20px 40px -20px #3a333140}.card-motion .card-media{overflow:hidden}.card-motion .card-media img{transition:transform .7s var(--ease-editorial)}.card-motion:hover .card-media img{transform:scale(1.03)}.card-motion .link-editorial:after{bottom:-2px}.gallery-set>.gallery-item:first-child{--gi-depth:.985;--gi-delay:0s}.gallery-set>.gallery-item:nth-child(2){--gi-depth:1;--gi-delay:90ms}.gallery-set>.gallery-item:nth-child(3){--gi-depth:.992;--gi-delay:.18s}.gallery-set>.gallery-item:nth-child(4){--gi-depth:.978;--gi-delay:.27s}html.js .gallery-item{--gi-y:18px;--gi-scale:.985;opacity:0;transform:translate3d(0, var(--gi-y), 0) scale(calc(var(--gi-scale) * var(--gi-depth,1)));transition:opacity .7s var(--ease-editorial) var(--gi-delay,0s), transform .7s var(--ease-editorial) var(--gi-delay,0s), box-shadow .6s var(--ease-editorial) 0s;position:relative}html.js [data-reveal=gallery].is-revealed .gallery-item{--gi-y:0px;--gi-scale:1;opacity:1}.gallery-item:after{content:"";opacity:0;transition:opacity .6s var(--ease-editorial);pointer-events:none;background:linear-gradient(115deg,#fff0 38%,#ffffff21 50%,#fff0 62%);position:absolute;inset:0}.gallery-item img{transition:transform .65s var(--ease-editorial)}@media (hover:hover) and (pointer:fine){.gallery-item:hover{box-shadow:0 26px 50px -26px #3a333166}.gallery-item:hover img{transform:scale(1.03)}.gallery-item:hover:after{opacity:1}}@media (width<=767px){html.js .gallery-item{--gi-y:12px;--gi-scale:.99;transition-duration:.5s,.5s,.4s}.gallery-item:after{display:none}}.booking-label{text-transform:uppercase;letter-spacing:.18em;color:#3a3331;margin-bottom:.5rem;font-size:10px;font-weight:600;display:block}.booking-optional{color:#3a33316b;letter-spacing:.12em;font-weight:500}.booking-input,.booking-select,.booking-textarea{color:#3a3331;appearance:none;width:100%;transition:border-color .35s var(--ease-soft), box-shadow .35s var(--ease-soft), background-color .35s var(--ease-soft);background:#fff;border:1px solid #e6dfd1;border-radius:12px;padding:.8rem 1rem;font-family:Plus Jakarta Sans,sans-serif;font-size:.875rem;line-height:1.5}.booking-input::placeholder,.booking-textarea::placeholder{color:#3a333159}.booking-input:hover,.booking-select:hover,.booking-textarea:hover{border-color:#d6ccb9}.booking-input:focus,.booking-select:focus,.booking-textarea:focus{border-color:#c47a5cbf;outline:none;box-shadow:0 0 0 3px #c47a5c21}.booking-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23C47A5C' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M1 1.75 6 6.25 11 1.75'/%3E%3C/svg%3E");background-position:right 1rem center;background-repeat:no-repeat;background-size:11px 8px;padding-right:2.5rem}.booking-input[type=date]::-webkit-calendar-picker-indicator{opacity:.4;cursor:pointer;transition:opacity .3s var(--ease-soft)}.booking-input[type=date]:hover::-webkit-calendar-picker-indicator{opacity:.85}.booking-input[type=date]:focus::-webkit-calendar-picker-indicator{opacity:.85}.booking-textarea{resize:vertical;min-height:92px}.booking-error{color:#a65d3f;opacity:0;max-height:0;transition:max-height .35s var(--ease-soft), opacity .3s var(--ease-soft), transform .35s var(--ease-soft), margin-top .35s var(--ease-soft);margin-top:0;font-size:11px;line-height:1.4;display:block;overflow:hidden;transform:translateY(-4px)}.booking-field.is-invalid .booking-error{opacity:1;max-height:3rem;margin-top:.5rem;transform:translateY(0)}.booking-field.is-invalid .booking-input,.booking-field.is-invalid .booking-select,.booking-field.is-invalid .booking-textarea{border-color:#a65d3f;box-shadow:0 0 0 3px #a65d3f1f}html.js .booking-field{opacity:0;transition:opacity .7s var(--ease-editorial) var(--bf-delay,0s), transform .7s var(--ease-editorial) var(--bf-delay,0s);transform:translateY(16px)}html.js [data-reveal=form].is-revealed .booking-field{opacity:1;transform:translate(0,0)}.booking-success{opacity:0;transition:opacity .6s var(--ease-editorial), transform .6s var(--ease-editorial);transform:translateY(14px)}.booking-success.is-visible{opacity:1;transform:translateY(0)}.booking-success-mark{animation:bookingMarkIn .6s var(--ease-editorial) both}@keyframes bookingMarkIn{0%{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}#booking-form.is-hiding{opacity:0;transition:opacity .35s var(--ease-soft), transform .35s var(--ease-soft);transform:translateY(8px)}#booking-form{transition:opacity .35s var(--ease-soft), transform .35s var(--ease-soft)}.icon-chip{transition:background-color .5s var(--ease-soft), transform .5s var(--ease-soft)}.card-motion:hover .icon-chip,.group:hover .icon-chip{background-color:#c47a5c29}.field-motion{transition:border-color .4s var(--ease-soft), background-color .4s var(--ease-soft), box-shadow .4s var(--ease-soft)}.field-motion:focus{background-color:#fff;border-color:#c47a5cb3;outline:none;box-shadow:0 0 0 3px #c47a5c1f}a:focus-visible,button:focus-visible{outline-offset:3px;outline:2px solid #c47a5c99}section[id],footer[id]{scroll-margin-top:96px}@media (prefers-reduced-motion:reduce){*,:before,:after{scroll-behavior:auto!important;transition-duration:.01ms!important;transition-delay:0s!important;animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important}html.js [data-reveal],html.js [data-header-item],html.js .site-nav a,html.js .gallery-item,html.js .booking-field{opacity:1!important;transform:none!important}.booking-success,.booking-success-mark{opacity:1!important;animation:none!important;transform:none!important}.booking-field.is-invalid .booking-error{opacity:1!important;max-height:3rem!important;margin-top:.5rem!important}.card-motion:hover,.btn-motion:hover{transform:none!important}}</style>
+    <script>
+        // Marca que o JS está ativo: evita conteúdo invisível caso o script falhe.
+        document.documentElement.classList.add('js');
+    </script>
+</head>
+<body class="bg-[#F9F6F0] text-[#3A3331] font-sans antialiased selection:bg-[#C47A5C] selection:text-white">
+
+    <!-- HEADER -->
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex flex-col" data-header-item="logo">
+                <span class="serif-heading text-2xl lg:text-3xl font-semibold tracking-[0.2em] uppercase text-white">Lumière</span>
+                <span class="text-[9px] tracking-[0.35em] text-[#D49275] uppercase font-medium -mt-1">Hair Salon</span>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center space-x-10 text-xs font-medium tracking-[0.15em] uppercase text-white/90 site-nav" data-header-item="nav">
+                <a href="#home" class="link-editorial">Home</a>
+                <a href="#services" class="link-editorial">Serviços</a>
+                <a href="#about" class="link-editorial">Sobre</a>
+                <a href="#gallery" class="link-editorial">Galeria</a>
+                <a href="#booking" class="link-editorial">Agendamento</a>
+                <a href="#contact" class="link-editorial">Contato</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div data-header-item="cta">
+                <a href="#booking" class="btn-motion bg-[#C47A5C] hover:bg-[#A65D3F] text-white text-xs uppercase tracking-[0.15em] font-medium px-7 py-3.5 rounded-full shadow-sm inline-flex items-center space-x-2">
+                    <span>Agendar Horário</span>
+                    <i class="fa-solid fa-arrow-right text-[9px] icon-arrow"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative w-full h-screen min-h-[700px] flex items-center justify-start overflow-hidden">
+        <!-- Background Video with Clean Cinematic Overlay -->
+        <div class="absolute inset-0 z-0">
+            <video id="hero-bg" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=1920" class="w-full h-full object-cover object-[70%_center] scale-105 transition-transform duration-1000 will-change-transform">
+                <source src="/videos/hero-salon.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20"></div>
+        </div>
+
+        <!-- Hero Content Overlaid (Aligned Left for Editorial Composition) -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 w-full flex flex-col items-start text-left pt-20">
+            <!-- Eyebrow -->
+            <span class="text-[11px] uppercase tracking-[0.3em] text-[#D49275] font-semibold mb-4 drop-shadow animate-fade-in-1">
+                Onde sua beleza floresce
+            </span>
+
+            <!-- H1 -->
+            <h1 class="serif-heading text-4xl sm:text-6xl lg:text-[80px] font-normal leading-[1.05] tracking-tight text-white mb-6 drop-shadow-md animate-fade-in-2">
+                Cabelo saudável. <br>
+                Beleza que <br>
+                <span class="text-[#D49275] italic">transforma.</span> <br>
+                Todos os dias.
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-sm sm:text-base text-white/80 font-normal leading-relaxed max-w-md mb-10 drop-shadow animate-fade-in-3">
+                Cuidado especializado. Tratamentos personalizados. Uma experiência de beleza feita para você.
+            </p>
+
+            <!-- CTA -->
+            <div class="flex flex-col sm:flex-row items-center gap-6 animate-fade-in-4">
+                <a href="#booking" class="btn-motion inline-flex items-center space-x-3 bg-[#C47A5C] hover:bg-[#A65D3F] text-white text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-full shadow-xl">
+                    <span>Agendar meu horário</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAIS SECTION -->
+    <section class="border-y border-[#E6DFD1] bg-[#F3EFE6]/50 py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 divide-y md:divide-y-0 md:divide-x divide-[#E6DFD1]">
+                
+                <!-- Item 1 -->
+                <div class="flex flex-col items-start pt-6 md:pt-0 md:px-6 first:pl-0 card-motion p-4 rounded-xl" data-reveal="card" data-d="1">
+                    <div class="w-11 h-11 rounded-full bg-[#C47A5C]/10 flex items-center justify-center text-[#C47A5C] mb-4 icon-chip">
+                        <i class="fa-solid fa-seedling text-sm"></i>
+                    </div>
+                    <h3 class="serif-heading text-xl font-semibold text-[#3A3331] mb-2">Produtos Premium</h3>
+                    <p class="text-xs text-[#3A3331]/70 leading-relaxed">Produtos selecionados para cuidar dos seus cabelos com excelência.</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex flex-col items-start pt-6 md:pt-0 md:px-6 card-motion p-4 rounded-xl" data-reveal="card" data-d="2">
+                    <div class="w-11 h-11 rounded-full bg-[#C47A5C]/10 flex items-center justify-center text-[#C47A5C] mb-4 icon-chip">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                    </div>
+                    <h3 class="serif-heading text-xl font-semibold text-[#3A3331] mb-2">Profissionais Especialistas</h3>
+                    <p class="text-xs text-[#3A3331]/70 leading-relaxed">Profissionais experientes e apaixonados por transformar sua beleza.</p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex flex-col items-start pt-6 md:pt-0 md:px-6 card-motion p-4 rounded-xl" data-reveal="card" data-d="3">
+                    <div class="w-11 h-11 rounded-full bg-[#C47A5C]/10 flex items-center justify-center text-[#C47A5C] mb-4 icon-chip">
+                        <i class="fa-solid fa-heart text-sm"></i>
+                    </div>
+                    <h3 class="serif-heading text-xl font-semibold text-[#3A3331] mb-2">Cuidado Personalizado</h3>
+                    <p class="text-xs text-[#3A3331]/70 leading-relaxed">Tratamentos pensados para seus objetivos, seu estilo e seu cabelo.</p>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="flex flex-col items-start pt-6 md:pt-0 md:px-6 last:pr-0 card-motion p-4 rounded-xl" data-reveal="card" data-d="4">
+                    <div class="w-11 h-11 rounded-full bg-[#C47A5C]/10 flex items-center justify-center text-[#C47A5C] mb-4 icon-chip">
+                        <i class="fa-solid fa-calendar-days text-sm"></i>
+                    </div>
+                    <h3 class="serif-heading text-xl font-semibold text-[#3A3331] mb-2">Agendamento Fácil</h3>
+                    <p class="text-xs text-[#3A3331]/70 leading-relaxed">Agende seu horário de forma rápida e tenha uma experiência sem complicações.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE SERVIÇOS -->
+    <section id="services" class="py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                
+                <!-- Left Title Column -->
+                <div class="lg:col-span-4 flex flex-col items-start lg:sticky lg:top-32">
+                    <span class="text-[11px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold mb-3" data-reveal="label" data-d="1">
+                        Nossos Serviços
+                    </span>
+                    <h2 class="serif-heading text-4xl lg:text-5xl font-normal text-[#3A3331] mb-4 leading-tight" data-reveal="title" data-d="2">
+                        Beleza e cuidado <br>para você.
+                    </h2>
+                    <div class="w-12 h-[1px] bg-[#C47A5C] mb-6" data-reveal="text" data-d="2"></div>
+                    <p class="text-xs sm:text-sm text-[#3A3331]/70 leading-relaxed mb-8" data-reveal="text" data-d="3">
+                        Do corte à transformação completa, criamos experiências personalizadas para valorizar sua beleza e revelar o melhor dos seus cabelos.
+                    </p>
+                    <div data-reveal="cta" data-d="4">
+                        <a href="#services" class="link-editorial text-xs uppercase tracking-[0.2em] font-semibold text-[#3A3331] hover:text-[#C47A5C] inline-flex items-center space-x-2">
+                            <span>Ver todos os serviços</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Services Cards Grid -->
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="card-motion bg-white rounded-2xl p-5 shadow-sm border border-[#E6DFD1]/50 flex flex-col" data-reveal="card" data-d="5">
+                        <div class="card-media w-full h-72 rounded-xl overflow-hidden mb-6 bg-[#E6DFD1]">
+                            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800" alt="Corte & Style" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="serif-heading text-2xl font-semibold text-[#3A3331] mb-2">Corte & Style</h3>
+                        <p class="text-xs text-[#3A3331]/70 leading-relaxed mb-6 flex-grow">Cortes personalizados e finalizações que valorizam seu estilo.</p>
+                        <div>
+                            <a href="#booking" class="link-editorial text-[11px] uppercase tracking-[0.15em] font-semibold text-[#C47A5C] hover:text-[#A65D3F] inline-flex items-center space-x-2">
+                                <span>Ver serviço</span>
+                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card-motion bg-white rounded-2xl p-5 shadow-sm border border-[#E6DFD1]/50 flex flex-col sm:mt-12" data-reveal="card" data-d="6">
+                        <div class="card-media w-full h-72 rounded-xl overflow-hidden mb-6 bg-[#E6DFD1]">
+                            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800" alt="Coloração" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="serif-heading text-2xl font-semibold text-[#3A3331] mb-2">Coloração</h3>
+                        <p class="text-xs text-[#3A3331]/70 leading-relaxed mb-6 flex-grow">Cores sofisticadas, naturais e personalizadas para você.</p>
+                        <div>
+                            <a href="#booking" class="link-editorial text-[11px] uppercase tracking-[0.15em] font-semibold text-[#C47A5C] hover:text-[#A65D3F] inline-flex items-center space-x-2">
+                                <span>Ver serviço</span>
+                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card-motion bg-white rounded-2xl p-5 shadow-sm border border-[#E6DFD1]/50 flex flex-col" data-reveal="card" data-d="7">
+                        <div class="card-media w-full h-72 rounded-xl overflow-hidden mb-6 bg-[#E6DFD1]">
+                            <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=800" alt="Tratamentos" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="serif-heading text-2xl font-semibold text-[#3A3331] mb-2">Tratamentos</h3>
+                        <p class="text-xs text-[#3A3331]/70 leading-relaxed mb-6 flex-grow">Cuidados profundos para cabelos fortes, saudáveis e brilhantes.</p>
+                        <div>
+                            <a href="#booking" class="link-editorial text-[11px] uppercase tracking-[0.15em] font-semibold text-[#C47A5C] hover:text-[#A65D3F] inline-flex items-center space-x-2">
+                                <span>Ver serviço</span>
+                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="card-motion bg-white rounded-2xl p-5 shadow-sm border border-[#E6DFD1]/50 flex flex-col sm:mt-12" data-reveal="card" data-d="8">
+                        <div class="card-media w-full h-72 rounded-xl overflow-hidden mb-6 bg-[#E6DFD1]">
+                            <img src="https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?auto=format&fit=crop&q=80&w=800" alt="Extensions" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="serif-heading text-2xl font-semibold text-[#3A3331] mb-2">Extensions</h3>
+                        <p class="text-xs text-[#3A3331]/70 leading-relaxed mb-6 flex-grow">Mais comprimento, volume e confiança com acabamento natural.</p>
+                        <div>
+                            <a href="#booking" class="link-editorial text-[11px] uppercase tracking-[0.15em] font-semibold text-[#C47A5C] hover:text-[#A65D3F] inline-flex items-center space-x-2">
+                                <span>Ver serviço</span>
+                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA EDITORIAL -->
+    <section id="gallery" class="py-24 lg:py-32 bg-[#F3EFE6]/30 border-y border-[#E6DFD1]/60 overflow-hidden">
+        <!-- Header da Seção -->
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full mb-14">
+            <span class="text-[11px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold mb-3 block" data-reveal="label" data-d="1">
+                Nosso Trabalho
+            </span>
+            <h2 class="serif-heading text-4xl sm:text-5xl lg:text-6xl font-normal text-[#3A3331] leading-tight" data-reveal="title" data-d="2">
+                Transformações que <br>falam por si.
+            </h2>
+        </div>
+
+        <!-- Marquee Horizontal Infinito -->
+        <div id="infinite-carousel" class="relative w-full overflow-hidden" data-reveal="gallery" data-d="3" style="cursor: grab; touch-action: pan-y;">
+            <div id="gallery-track" class="flex w-max pl-6 lg:pl-12 will-change-transform">
+                <div class="gallery-set flex shrink-0 items-center gap-8 pr-8">
+                    <!-- Imagem 1 -->
+                    <div class="gallery-item shrink-0 w-[300px] lg:w-[400px] h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-sm bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=1000" alt="Corte e finalização" draggable="false" class="w-full h-full object-cover select-none">
+                    </div>
+                    <!-- Imagem 2 -->
+                    <div class="gallery-item shrink-0 w-[300px] lg:w-[400px] h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-sm bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800" alt="Coloração sofisticada" draggable="false" class="w-full h-full object-cover select-none">
+                    </div>
+                    <!-- Imagem 3 -->
+                    <div class="gallery-item shrink-0 w-[300px] lg:w-[400px] h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-sm bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=800" alt="Tratamento capilar profundo" draggable="false" class="w-full h-full object-cover select-none">
+                    </div>
+                    <!-- Imagem 4 -->
+                    <div class="gallery-item shrink-0 w-[400px] lg:w-[600px] h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-sm bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=1200" alt="Ambiente do salão Lumière" draggable="false" class="w-full h-full object-cover select-none">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND STORY / SEQUÊNCIA CINEMATOGRÁFICA CONTROLADA PELO SCROLL -->
+    <!-- A altura de 400vh existe APENAS para fornecer distância de scroll.
+         O conteúdo visual permanece travado em 100vh (sticky). -->
+    <section id="about" class="relative bg-[#C47A5C] text-white h-[400vh]">
+        <div class="sticky top-0 h-screen w-full overflow-hidden">
+
+            <!-- CAMADA 1 — Sequência de frames ocupando 100% da viewport -->
+            <div class="absolute inset-0">
+                <canvas id="about-sequence-canvas" class="block w-full h-full"></canvas>
+                <!-- Fallback estático: visível enquanto o frame 1 não carrega -->
+                <img id="about-fallback-img" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1000" alt="Ambiente sofisticado do salão" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none">
+            </div>
+
+            <!-- CAMADA 2 — Overlays cinematográficos para legibilidade -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#A65D3F]/70 via-transparent to-black/25"></div>
+
+            <!-- CAMADA 3 — Conteúdo editorial sobreposto com Motion -->
+            <div class="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center about-content-wrapper">
+                <div class="max-w-xl lg:max-w-2xl">
+
+                    <span class="about-text-layer delay-1 text-[11px] uppercase tracking-[0.25em] text-white/80 font-semibold mb-3 block drop-shadow">
+                        Mais do que un salón
+                    </span>
+
+                    <h2 class="about-text-layer delay-2 serif-heading text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight mb-6 drop-shadow-md">
+                        Seu momento. <br>
+                        Seu cuidado. <br>
+                        Sua beleza.
+                    </h2>
+
+                    <p class="about-text-layer delay-3 text-sm sm:text-base text-white/90 font-normal leading-relaxed mb-10 max-w-lg drop-shadow">
+                        Criamos mais do que cabelos bonitos. Criamos momentos de cuidado, confiança e bem-estar que acompanham você muito além do salão.
+                    </p>
+
+                    <div class="about-text-layer delay-4">
+                        <a href="#about" class="btn-motion inline-flex items-center space-x-3 bg-white text-[#C47A5C] hover:text-[#A65D3F] text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4 rounded-full shadow-sm">
+                            <span>Conheça nossa história</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <style>.about-text-layer{opacity:0;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transform:translateY(20px)}.about-text-layer.is-revealed{opacity:1;transform:translateY(0)}.delay-1{transition-delay:0s}.delay-2{transition-delay:.15s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.45s}@media (prefers-reduced-motion:reduce){.about-text-layer{opacity:1!important;transform:none!important}}</style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.getElementById('about');
+            const canvas = document.getElementById('about-sequence-canvas');
+            const fallbackImg = document.getElementById('about-fallback-img');
+            const content = document.querySelector('.about-content-wrapper');
+            if (!section || !canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const totalFrames = 300;
+            const frames = new Array(totalFrames);
+            let currentFrame = -1;
+            let pending = false;
+
+            const pad = (n) => String(n).padStart(4, '0');
+
+            // IntersectionObserver para disparar a entrada do texto
+            const revealObs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    if (content) {
+                        content.querySelectorAll('.about-text-layer').forEach(el => el.classList.add('is-revealed'));
+                    }
+                    revealObs.disconnect();
+                }
+            }, { threshold: 0.2 });
+            revealObs.observe(section);
+
+            // ---------- Render com object-fit: cover, escala de profundidade e nitidez DPI alto ----------
+            const render = (index) => {
+                let frame = frames[index];
+
+                if (!frame) {
+                    for (let d = 1; d <= 20; d++) {
+                        if (frames[index - d]) { frame = frames[index - d]; break; }
+                        if (frames[index + d]) { frame = frames[index + d]; break; }
+                    }
+                }
+                if (!frame) return;
+
+                const cssW = canvas.clientWidth;
+                const cssH = canvas.clientHeight;
+                if (!cssW || !cssH) return;
+
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const targetW = Math.round(cssW * dpr);
+                const targetH = Math.round(cssH * dpr);
+
+                if (canvas.width !== targetW || canvas.height !== targetH) {
+                    canvas.width = targetW;
+                    canvas.height = targetH;
+                }
+
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                ctx.clearRect(0, 0, cssW, cssH);
+
+                // Efeito sutil de profundidade (escala 1.02 -> 1.0)
+                const scaleFactor = 1.02 - (index / (totalFrames - 1)) * 0.02;
+
+                const scale = Math.max(cssW / (frame.width * scaleFactor), cssH / (frame.height * scaleFactor));
+                const drawW = frame.width * scale * scaleFactor;
+                const drawH = frame.height * scale * scaleFactor;
+                const drawX = (cssW - drawW) / 2;
+                const drawY = (cssH - drawH) / 2;
+
+                ctx.drawImage(frame, drawX, drawY, drawW, drawH);
+            };
+
+            // ---------- Progresso real do scroll dentro da seção ----------
+            const update = () => {
+                pending = false;
+
+                const scrollRange = section.offsetHeight - window.innerHeight;
+                if (scrollRange <= 0) return;
+
+                const rect = section.getBoundingClientRect();
+                let progress = -rect.top / scrollRange;
+                progress = progress < 0 ? 0 : (progress > 1 ? 1 : progress);
+
+                // Fade out sutil do texto no terço final da sequência
+                if (content) {
+                    if (progress > 0.75) {
+                        content.style.opacity = Math.max(0, 1 - (progress - 0.75) / 0.2);
+                    } else {
+                        content.style.opacity = 1;
+                    }
+                }
+
+                const target = Math.min(totalFrames - 1, Math.floor(progress * (totalFrames - 1)));
+                if (target !== currentFrame) {
+                    currentFrame = target;
+                    render(target);
+                }
+            };
+
+            const onScroll = () => {
+                if (pending) return;
+                pending = true;
+                requestAnimationFrame(update);
+            };
+
+            // ---------- Preload inteligente ----------
+            const WINDOW = 25;
+            const loadFrame = (index) => new Promise((resolve) => {
+                if (frames[index]) return resolve();
+                const img = new Image();
+                img.onload = () => {
+                    frames[index] = img;
+                    if (index === 0 && fallbackImg) {
+                        fallbackImg.style.opacity = '0';
+                        render(0);
+                        currentFrame = 0;
+                    }
+                    resolve();
+                };
+                img.onerror = () => resolve();
+                img.src = '/frames/about/frame-' + pad(index + 1) + '.webp';
+            });
+
+            for (let i = 0; i < WINDOW; i++) loadFrame(i);
+
+            let cursor = WINDOW;
+            const loadRest = () => {
+                const end = Math.min(totalFrames, cursor + 25);
+                for (let i = cursor; i < end; i++) loadFrame(i);
+                cursor = end;
+                if (cursor < totalFrames) setTimeout(loadRest, 120);
+            };
+            setTimeout(loadRest, 150);
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', () => {
+                currentFrame = -1;
+                update();
+            }, { passive: true });
+            window.addEventListener('load', onScroll, { once: true });
+
+            update();
+        });
+    </script>
+
+    <!-- SEÇÃO FINAL DE AGENDAMENTO -->
+    <section id="booking" class="py-24 lg:py-32 bg-[#F9F6F0] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+            <!-- Cabeçalho editorial -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div class="lg:col-span-5 flex justify-center" data-reveal="image" data-d="1">
+                    <div class="w-full max-w-[500px] h-[320px] sm:h-[400px] rounded-[30px] overflow-hidden shadow-xl bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=1000" alt="Interior do salão Lumière" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 flex flex-col items-start" data-reveal="text" data-d="2">
+                    <span class="text-[11px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold mb-3">
+                        Agendamento
+                    </span>
+                    <h2 class="serif-heading text-4xl sm:text-5xl lg:text-6xl font-normal text-[#3A3331] mb-6 leading-tight">
+                        Pronta para <br>seu melhor cabelo?
+                    </h2>
+                    <p class="text-sm sm:text-base text-[#3A3331]/70 leading-relaxed max-w-md">
+                        Agende seu horário e transforme seu próximo momento de beleza em uma experiência especial.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Formulário -->
+            <div class="mt-14 lg:mt-20" data-reveal="form" data-d="3">
+                <div class="bg-white rounded-[28px] border border-[#E6DFD1]/60 shadow-sm p-6 sm:p-8 lg:p-12">
+
+                    <form id="booking-form" class="grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-5" novalidate>
+
+                        <div class="booking-field lg:col-span-6" style="--bf-delay:.05s">
+                            <label class="booking-label" for="bk-service">Serviço desejado</label>
+                            <select id="bk-service" name="servico" class="booking-select">
+                                <option value="">Selecione um serviço</option>
+                                <option>Corte &amp; Style</option>
+                                <option>Coloração</option>
+                                <option>Tratamentos</option>
+                                <option>Extensions</option>
+                            </select>
+                            <span class="booking-error">Selecione um serviço para continuar.</span>
+                        </div>
+
+                        <div class="booking-field lg:col-span-6" style="--bf-delay:.11s">
+                            <label class="booking-label" for="bk-professional">Profissional de preferência</label>
+                            <select id="bk-professional" name="profissional" class="booking-select">
+                                <option value="">Selecione um profissional</option>
+                                <option>Sem preferência</option>
+                                <option>Ana Clara</option>
+                                <option>Beatriz</option>
+                                <option>Camila</option>
+                                <option>Juliana</option>
+                            </select>
+                            <span class="booking-error">Selecione um profissional.</span>
+                        </div>
+
+                        <div class="booking-field lg:col-span-6" style="--bf-delay:.17s">
+                            <label class="booking-label" for="bk-date">Data</label>
+                            <input id="bk-date" name="data" type="date" class="booking-input">
+                            <span class="booking-error">Escolha uma data válida, a partir de hoje.</span>
+                        </div>
+
+                        <div class="booking-field lg:col-span-6" style="--bf-delay:.23s">
+                            <label class="booking-label" for="bk-time">Horário</label>
+                            <select id="bk-time" name="horario" class="booking-select">
+                                <option value="">Selecione um horário</option>
+                                <option>09:00</option>
+                                <option>10:00</option>
+                                <option>11:00</option>
+                                <option>13:00</option>
+                                <option>14:00</option>
+                                <option>15:00</option>
+                                <option>16:00</option>
+                                <option>17:00</option>
+                                <option>18:00</option>
+                            </select>
+                            <span class="booking-error">Selecione um horário disponível.</span>
+                        </div>
+
+                        <div class="booking-field lg:col-span-12" style="--bf-delay:.29s">
+                            <label class="booking-label" for="bk-name">Nome completo</label>
+                            <input id="bk-name" name="nome" type="text" autocomplete="name" placeholder="Como devemos chamar você?" class="booking-input">
+                            <span class="booking-error">Informe seu nome completo.</span>
+                        </div>
+
+                        <div class="booking-field lg:col-span-12" style="--bf-delay:.35s">
+                            <label class="booking-label" for="bk-phone">WhatsApp</label>
+                            <input id="bk-phone" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(11) 99999-9999" class="booking-input">
+                            <span class="booking-error">Informe um WhatsApp válido com DDD.</span>
+                        </div>
+
+                        <div class="booking-field lg:col-span-12" style="--bf-delay:.41s">
+                            <label class="booking-label" for="bk-notes">Observações <span class="booking-optional">(opcional)</span></label>
+                            <textarea id="bk-notes" name="observacoes" rows="3" placeholder="Algo que devemos saber para cuidar melhor do seu cabelo?" class="booking-textarea"></textarea>
+                        </div>
+
+                        <div class="booking-field lg:col-span-12 pt-2" style="--bf-delay:.47s">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                                <p class="text-[11px] text-[#3A3331]/55 leading-relaxed max-w-xs">
+                                    Ao enviar, abrimos o WhatsApp com os seus dados para confirmar o horário.
+                                </p>
+                                <button type="submit" class="btn-motion inline-flex items-center justify-center space-x-3 bg-[#C47A5C] hover:bg-[#A65D3F] text-white text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4 rounded-full shadow-sm w-full sm:w-auto">
+                                    <span>Solicitar Agendamento</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!-- Estado de sucesso -->
+                    <div id="booking-success" class="booking-success" hidden>
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <span class="booking-success-mark shrink-0 w-14 h-14 rounded-full bg-[#C47A5C]/10 text-[#C47A5C] flex items-center justify-center">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true">
+                                    <path d="M4 12.5 9.5 18 20 6.5"/>
+                                </svg>
+                            </span>
+                            <div class="flex flex-col items-start">
+                                <h3 class="serif-heading text-3xl lg:text-4xl font-normal text-[#3A3331] mb-3 leading-tight">
+                                    Solicitação enviada.
+                                </h3>
+                                <p class="text-sm text-[#3A3331]/70 leading-relaxed mb-6 max-w-md">
+                                    Você será direcionada ao WhatsApp para confirmar seu horário.
+                                </p>
+                                <button type="button" id="booking-reset" class="link-editorial text-[11px] uppercase tracking-[0.15em] font-semibold text-[#3A3331] hover:text-[#C47A5C]">
+                                    Enviar outra solicitação
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        /* ============================================================
+           AGENDAMENTO — lógica do formulário
+           Sem dependências. Sem reload. Validação nativa + microcopy.
+           ============================================================ */
+        (function () {
+            'use strict';
+
+            /* ==========================================================
+               CONFIGURAÇÃO — altere aqui os dados do salão
+               ========================================================== */
+            var BOOKING_CONFIG = {
+                // Número do WhatsApp em formato internacional, só dígitos.
+                // Ex.: 55 + DDD + número  ->  '5511999999999'
+                whatsappNumber: '551145567890',
+
+                // Mensagem de abertura da conversa
+                greeting: 'Olá! Gostaria de solicitar um agendamento na Lumière Hair Salon.'
+            };
+            /* ========================================================== */
+
+            function ready(fn) {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', fn, { once: true });
+                } else {
+                    fn();
+                }
+            }
+
+            ready(function () {
+                var form = document.getElementById('booking-form');
+                var success = document.getElementById('booking-success');
+                var resetBtn = document.getElementById('booking-reset');
+                if (!form || !success) return;
+
+                var reduceMotion = window.matchMedia
+                    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                    : false;
+
+                var fields = Array.prototype.slice.call(form.querySelectorAll('.booking-field'));
+
+                // --------- Máscara de telefone brasileiro ---------
+                function maskPhone(value) {
+                    var d = String(value).replace(/\D/g, '').slice(0, 11);
+                    if (d.length === 0) return '';
+                    if (d.length <= 2) return '(' + d;
+                    if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+                    if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+                    return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+                }
+
+                function toISODate(date) {
+                    var m = String(date.getMonth() + 1).padStart(2, '0');
+                    var d = String(date.getDate()).padStart(2, '0');
+                    return date.getFullYear() + '-' + m + '-' + d;
+                }
+
+                // Impede seleção de datas passadas
+                var dateInput = document.getElementById('bk-date');
+                if (dateInput) dateInput.min = toISODate(new Date());
+
+                // --------- Validação ---------
+                var validators = {
+                    'bk-service': function (el) {
+                        return el.value.trim() !== '' || 'Selecione um serviço para continuar.';
+                    },
+                    'bk-professional': function (el) {
+                        return el.value.trim() !== '' || 'Selecione um profissional.';
+                    },
+                    'bk-time': function (el) {
+                        return el.value.trim() !== '' || 'Selecione um horário disponível.';
+                    },
+                    'bk-date': function (el) {
+                        if (!el.value) return 'Escolha uma data válida, a partir de hoje.';
+                        var today = new Date(); today.setHours(0, 0, 0, 0);
+                        var chosen = new Date(el.value + 'T00:00:00');
+                        if (isNaN(chosen.getTime())) return 'Escolha uma data válida, a partir de hoje.';
+                        if (chosen < today) return 'Escolha uma data válida, a partir de hoje.';
+                        return true;
+                    },
+                    'bk-name': function (el) {
+                        var v = el.value.trim();
+                        if (v === '') return 'Informe seu nome completo.';
+                        if (v.length < 3) return 'Informe seu nome completo.';
+                        if (!/\s/.test(v)) return 'Digite seu nome e sobrenome.';
+                        return true;
+                    },
+                    'bk-phone': function (el) {
+                        var d = el.value.replace(/\D/g, '');
+                        if (d === '') return 'Informe um WhatsApp válido com DDD.';
+                        if (d.length < 10) return 'Informe um WhatsApp válido com DDD.';
+                        if (d.length > 11) return 'Informe um WhatsApp válido com DDD.';
+                        return true;
+                    }
+                };
+
+                function setInvalid(wrap, invalid, message) {
+                    if (!wrap) return;
+                    if (invalid) {
+                        wrap.classList.add('is-invalid');
+                        var err = wrap.querySelector('.booking-error');
+                        if (err && message) err.textContent = message;
+                        wrap.setAttribute('data-invalid', 'true');
+                    } else {
+                        wrap.classList.remove('is-invalid');
+                        wrap.removeAttribute('data-invalid');
+                    }
+                }
+
+                function wrapOf(el) {
+                    return el ? el.closest('.booking-field') : null;
+                }
+
+                function validateField(el) {
+                    var fn = validators[el.id];
+                    if (!fn) return true;
+                    var result = fn(el);
+                    if (result === true) {
+                        setInvalid(wrapOf(el), false);
+                        return true;
+                    }
+                    setInvalid(wrapOf(el), true, result);
+                    return false;
+                }
+
+                // Validação ao sair do campo, e limpeza do erro ao corrigir
+                fields.forEach(function (wrap) {
+                    var control = wrap.querySelector('input, select, textarea');
+                    if (!control) return;
+
+                    control.addEventListener('blur', function () {
+                        if (control.id === 'bk-notes') return;
+                        validateField(control);
+                    });
+
+                    control.addEventListener('input', function () {
+                        if (wrap.classList.contains('is-invalid')) validateField(control);
+                    });
+
+                    control.addEventListener('change', function () {
+                        if (wrap.classList.contains('is-invalid')) validateField(control);
+                    });
+                });
+
+                // Máscara enquanto digita
+                var phone = document.getElementById('bk-phone');
+                if (phone) {
+                    phone.addEventListener('input', function () {
+                        var before = phone.value.length;
+                        phone.value = maskPhone(phone.value);
+                        try { phone.setSelectionRange(before, before); } catch (e) { /* noop */ }
+                    });
+                    phone.addEventListener('blur', function () {
+                        phone.value = maskPhone(phone.value);
+                    });
+                }
+
+                // Data não pode voltar para o passado
+                if (dateInput) {
+                    dateInput.addEventListener('change', function () {
+                        var today = toISODate(new Date());
+                        if (dateInput.value && dateInput.value < today) dateInput.value = '';
+                    });
+                }
+
+                // --------- Envio ---------
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    var invalid = [];
+                    Object.keys(validators).forEach(function (id) {
+                        var el = document.getElementById(id);
+                        if (!el) return;
+                        if (!validateField(el)) invalid.push(el);
+                    });
+
+                    if (invalid.length) {
+                        var first = invalid[0];
+                        if (first.focus) {
+                            first.focus({ preventScroll: true });
+                            first.scrollIntoView({
+                                behavior: reduceMotion ? 'auto' : 'smooth',
+                                block: 'center'
+                            });
+                        }
+                        return;
+                    }
+
+                    var get = function (id) {
+                        var el = document.getElementById(id);
+                        return el ? el.value.trim() : '';
+                    };
+
+                    var notes = get('bk-notes') || 'Não informado.';
+
+                    var message = [
+                        BOOKING_CONFIG.greeting,
+                        '',
+                        'Serviço: ' + get('bk-service'),
+                        'Profissional: ' + get('bk-professional'),
+                        'Data: ' + get('bk-date'),
+                        'Horário: ' + get('bk-time'),
+                        'Nome: ' + get('bk-name'),
+                        'WhatsApp: ' + get('bk-phone'),
+                        'Observações: ' + notes
+                    ].join('\n');
+
+                    var url = 'https://wa.me/' + BOOKING_CONFIG.whatsappNumber +
+                        '?text=' + encodeURIComponent(message);
+
+                    window.open(url, '_blank', 'noopener');
+
+                    // Estado de sucesso
+                    form.classList.add('is-hiding');
+                    var delay = reduceMotion ? 0 : 320;
+                    setTimeout(function () {
+                        form.hidden = true;
+                        form.classList.remove('is-hiding');
+                        success.hidden = false;
+                        // força reflow para garantir a transição de entrada
+                        void success.offsetWidth;
+                        success.classList.add('is-visible');
+                    }, delay);
+                });
+
+                // --------- Reenvio ---------
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', function () {
+                        form.reset();
+                        fields.forEach(function (w) { w.classList.remove('is-invalid'); });
+                        success.classList.remove('is-visible');
+                        setTimeout(function () {
+                            success.hidden = true;
+                            form.hidden = false;
+                            void form.offsetWidth;
+                            form.classList.add('is-hiding');
+                            requestAnimationFrame(function () {
+                                form.classList.remove('is-hiding');
+                            });
+                        }, reduceMotion ? 0 : 300);
+                    });
+                }
+            });
+        })();
+    </script>
+
+    <!-- SEÇÃO DE CONTATO (NOVA) -->
+    <section id="contact" class="py-24 lg:py-32 bg-[#FBF9F5]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            
+            <!-- Esquerda: Mensagem -->
+            <div class="lg:col-span-6 flex flex-col items-start" data-reveal="text" data-d="1">
+                <span class="text-[11px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold mb-3">VENHA NOS CONHECER</span>
+                <h2 class="serif-heading text-4xl sm:text-5xl lg:text-6xl font-normal text-[#3A3331] mb-6 leading-tight">Seu próximo momento começa aqui.</h2>
+                <p class="text-sm sm:text-base text-[#3A3331]/70 leading-relaxed mb-10 max-w-md">Estamos prontas para receber você. Agende seu horário ou fale conosco para descobrir o melhor cuidado para o seu cabelo.</p>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <a href="#booking" class="btn-motion inline-flex items-center space-x-3 bg-[#C47A5C] hover:bg-[#A65D3F] text-white text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4 rounded-full shadow-sm w-full sm:w-auto justify-center">
+                        <span>Agendar Meu Horário</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+                    </a>
+                    <a href="https://wa.me/551145567890" target="_blank" rel="noopener" class="text-[#3A3331] hover:text-[#C47A5C] text-xs uppercase tracking-[0.2em] font-semibold transition-colors flex items-center space-x-2">
+                        <span>Falar no WhatsApp</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] translate-x-0 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Direita: Informações -->
+            <div class="lg:col-span-6 bg-white p-8 sm:p-10 rounded-[28px] border border-[#E6DFD1]/60 shadow-sm" data-reveal="text" data-d="2">
+                <!-- Imagem editorial -->
+                <div class="w-full h-48 sm:h-56 rounded-2xl overflow-hidden mb-10 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800" alt="Ambiente do salão" class="w-full h-full object-cover">
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                    <div class="space-y-6">
+                        <div class="space-y-1">
+                            <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">Endereço</h4>
+                            <p class="text-sm text-[#3A3331]">123 Beauty Lane<br>São Paulo, SP</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">Contato</h4>
+                            <p class="text-sm text-[#3A3331]">(11) 4556-7890<br>hello@lumierehairsalon.com</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="space-y-1">
+                            <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">Funcionamento</h4>
+                            <p class="text-sm text-[#3A3331]">Seg – Sáb<br>09h às 19h</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">Instagram</h4>
+                            <a href="#" class="text-sm text-[#3A3331] hover:text-[#C47A5C] transition-colors border-b border-[#C47A5C]/30 pb-0.5">@lumierehairsalon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SMOOTH SCROLLING (LENIS) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+    <script>
+        (function() {
+            // Se preferir movimento reduzido, não inicializa
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                touchMultiplier: 1.5,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        })();
+    </script>
+    
+    <!-- FOOTER -->
+    <footer id="footer" class="bg-[#3A3331] text-white pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            
+            <!-- Top: Logo + CTA Area -->
+            <div class="flex flex-col items-center text-center mb-20" data-reveal="text" data-d="1">
+                <h2 class="serif-heading text-3xl font-normal mb-2">LUMIÈRE</h2>
+                <span class="text-[10px] tracking-[0.3em] uppercase opacity-70 mb-8">HAIR SALON</span>
+                <p class="text-sm opacity-80 mb-10 max-w-sm">Beleza, cuidado e momentos feitos para você.</p>
+                
+                <div class="space-y-6">
+                    <h3 class="text-xl serif-heading">Seu próximo momento começa aqui.</h3>
+                    <a href="#booking" class="btn-motion inline-flex items-center space-x-3 bg-white text-[#3A3331] hover:bg-white/90 text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4 rounded-full shadow-sm">
+                        <span>Agendar Meu Horário</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Middle: Nav + Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 border-t border-white/10 pt-16" data-reveal="text" data-d="2">
+                <!-- Nav -->
+                <div class="flex flex-col items-center lg:items-start space-y-6">
+                     <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold opacity-60">Navegação</h4>
+                     <nav class="flex flex-col items-center lg:items-start gap-4">
+                         <a href="#home" class="link-editorial text-sm">Início</a>
+                         <a href="#services" class="link-editorial text-sm">Serviços</a>
+                         <a href="#about" class="link-editorial text-sm">Sobre</a>
+                         <a href="#gallery" class="link-editorial text-sm">Galeria</a>
+                         <a href="#booking" class="link-editorial text-sm">Agendamento</a>
+                         <a href="#contact" class="link-editorial text-sm">Contato</a>
+                     </nav>
+                </div>
+                <!-- Info -->
+                <div class="flex flex-col items-center lg:items-start space-y-6">
+                    <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold opacity-60">Contato</h4>
+                    <div class="flex flex-col items-center lg:items-start gap-3">
+                        <a href="https://wa.me/551145567890" target="_blank" rel="noopener" class="link-editorial text-sm">(11) 4556-7890</a>
+                        <a href="mailto:hello@lumierehairsalon.com" class="link-editorial text-sm">hello@lumierehairsalon.com</a>
+                        <a href="#" class="link-editorial text-sm">Instagram</a>
+                    </div>
+                </div>
+                <!-- Details -->
+                <div class="flex flex-col items-center lg:items-start space-y-6">
+                    <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold opacity-60">Endereço & Horário</h4>
+                    <div class="text-sm text-center lg:text-left opacity-80 leading-relaxed">
+                        <p>123 Beauty Lane<br>São Paulo, SP</p>
+                        <p class="mt-4">Seg – Sáb: 09h às 19h</p>
+                    </div>
+                </div>
+                <!-- Extras -->
+                <div class="flex flex-col items-center lg:items-start space-y-6">
+                    <h4 class="text-[10px] uppercase tracking-[0.2em] font-semibold opacity-60">Mais</h4>
+                    <nav class="flex flex-col items-center lg:items-start gap-4">
+                        <a href="#" class="link-editorial text-sm">FAQ</a>
+                        <a href="#" class="link-editorial text-sm">Cuidados</a>
+                        <a href="#" class="link-editorial text-sm">Gift Cards</a>
+                        <a href="#" class="link-editorial text-sm">Privacidade</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="flex flex-col items-center mt-20 pt-8 border-t border-white/10 text-[10px] uppercase tracking-[0.1em] opacity-50" data-reveal="text" data-d="3">
+                <p>© 2026 Lumière Hair Salon. Todos os direitos reservados.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE MOTION DISCRETO E CINEMATOGRÁFICO -->
+    <script>
+    (function () {
+        'use strict';
+
+        // Executa assim que o DOM estiver pronto (sem depender do evento DOMContentLoaded,
+        // que pode já ter disparado em navegadores que reexecutam scripts via cache).
+        function ready(fn) {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', fn, { once: true });
+            } else {
+                fn();
+            }
+        }
+
+        ready(function () {
+            var reduceMotionQuery = window.matchMedia
+                ? window.matchMedia('(prefers-reduced-motion: reduce)')
+                : { matches: false, addEventListener: function () {} };
+
+            // ================================================================
+            // 1) HEADER — fundo no scroll + parallax sutil do hero
+            // ================================================================
+            try {
+                var header = document.getElementById('site-header');
+                var heroBg = document.getElementById('hero-bg');
+
+                if (header) {
+                    var updateOnScroll = function () {
+                        if (window.scrollY > 40) {
+                            header.classList.add('bg-[#3A3331]/90', 'backdrop-blur-md', 'shadow-sm', 'border-white/5');
+                            header.classList.remove('bg-transparent', 'border-white/10');
+                        } else {
+                            header.classList.remove('bg-[#3A3331]/90', 'backdrop-blur-md', 'shadow-sm', 'border-white/5');
+                            header.classList.add('bg-transparent', 'border-white/10');
+                        }
+                    };
+                    window.addEventListener('scroll', updateOnScroll, { passive: true });
+                    updateOnScroll();
+                }
+
+                if (heroBg && !reduceMotionQuery.matches) {
+                    window.addEventListener('scroll', function () {
+                        if (window.scrollY > window.innerHeight) return;
+                        heroBg.style.transform =
+                            'translateY(' + (window.scrollY * 0.15).toFixed(2) + 'px) scale(1.05)';
+                    }, { passive: true });
+                }
+            } catch (err) {
+                console.warn('[Lumière] header:', err);
+            }
+
+            // ================================================================
+            // 2) MARQUEE DA GALERIA — loop horizontal infinito e automático
+            //    Independente de prefers-reduced-motion: é o conteúdo da seção,
+            //    lento e sem estímulo vestibular. Reduced-motion afeta só o
+            //    movimento decorativo (reveals e parallax).
+            // ================================================================
+            try {
+                var carousel = document.getElementById('infinite-carousel');
+                var track = document.getElementById('gallery-track');
+                var firstSet = track ? track.querySelector('.gallery-set') : null;
+
+                if (carousel && track && firstSet) {
+                    var SPEED = 30; // px por segundo
+                    var MAX_DT = 0.05; // trava o salto ao voltar de uma aba inativa
+
+                    var setWidth = 0;
+                    var offset = 0;
+                    var dragging = false;
+                    var dragStartX = 0;
+                    var dragStartOffset = 0;
+                    var lastTime = 0;
+                    var rafId = null;
+
+                    // Mantém o offset sempre dentro de [-setWidth, 0) — loop invisível
+                    var normalize = function (value) {
+                        if (setWidth <= 0) return 0;
+                        var mod = value % setWidth;
+                        return mod > 0 ? mod - setWidth : mod;
+                    };
+
+                    var applyTransform = function () {
+                        track.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
+                    };
+
+                    // Clona o conjunto até cobrir 2x a largura do viewport
+                    var buildLoop = function () {
+                        while (track.children.length > 1) {
+                            track.removeChild(track.lastElementChild);
+                        }
+                        var w = firstSet.getBoundingClientRect().width;
+                        if (w <= 0) return false;
+                        setWidth = w;
+
+                        var needed = Math.max(2, Math.ceil((window.innerWidth * 2) / setWidth) + 1);
+                        for (var i = 1; i < needed; i++) {
+                            track.appendChild(firstSet.cloneNode(true));
+                        }
+                        offset = normalize(offset);
+                        applyTransform();
+                        return true;
+                    };
+
+                    // Mede e monta o loop; se a largura ainda for 0 (layout pendente),
+                    // tenta novamente nos próximos frames.
+                    var measure = function () {
+                        if (buildLoop()) return true;
+                        var w = firstSet.getBoundingClientRect().width;
+                        if (w > 0) { setWidth = w; return buildLoop(); }
+                        return false;
+                    };
+
+                    if (!measure()) {
+                        var attempts = 0;
+                        var retry = function () {
+                            attempts++;
+                            if (measure() || attempts > 120) return;
+                            rafId = requestAnimationFrame(retry);
+                        };
+                        rafId = requestAnimationFrame(retry);
+                    }
+
+                    // Re-medir quando as fontes/imagens assentarem o layout
+                    var remeasure = function () {
+                        if (measure()) {
+                            offset = normalize(offset);
+                            applyTransform();
+                        }
+                    };
+                    window.addEventListener('load', remeasure);
+                    if (document.fonts && document.fonts.ready) {
+                        document.fonts.ready.then(remeasure).catch(function () {});
+                    }
+                    window.addEventListener('resize', function () {
+                        remeasure();
+                    });
+
+                    // Loop de animação: movimento automático contínuo
+                    var animate = function (time) {
+                        if (!lastTime) lastTime = time;
+                        var dt = Math.min(MAX_DT, (time - lastTime) / 1000);
+                        lastTime = time;
+
+                        if (!dragging && setWidth > 0) {
+                            offset = normalize(offset - SPEED * dt);
+                            applyTransform();
+                        }
+                        rafId = requestAnimationFrame(animate);
+                    };
+                    rafId = requestAnimationFrame(animate);
+
+                    // Ao voltar para a aba, zera o relógio para não dar salto
+                    document.addEventListener('visibilitychange', function () {
+                        lastTime = 0;
+                    });
+
+                    // --- Drag manual (mouse) ---
+                    carousel.addEventListener('mousedown', function (e) {
+                        dragging = true;
+                        dragStartX = e.clientX;
+                        dragStartOffset = offset;
+                        carousel.style.cursor = 'grabbing';
+                        e.preventDefault();
+                    });
+
+                    window.addEventListener('mousemove', function (e) {
+                        if (!dragging) return;
+                        offset = normalize(dragStartOffset + (e.clientX - dragStartX));
+                        applyTransform();
+                    });
+
+                    var endDrag = function () {
+                        if (!dragging) return;
+                        dragging = false;
+                        carousel.style.cursor = '';
+                    };
+                    window.addEventListener('mouseup', endDrag);
+                    carousel.addEventListener('mouseleave', endDrag);
+                    carousel.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+                    // --- Swipe (touch) ---
+                    var touchStartX = 0;
+                    var touchStartOffset = 0;
+                    var touchActive = false;
+
+                    carousel.addEventListener('touchstart', function (e) {
+                        if (!e.touches.length) return;
+                        touchActive = true;
+                        touchStartX = e.touches[0].clientX;
+                        touchStartOffset = offset;
+                    }, { passive: true });
+
+                    carousel.addEventListener('touchmove', function (e) {
+                        if (!touchActive || !e.touches.length) return;
+                        offset = normalize(touchStartOffset + (e.touches[0].clientX - touchStartX));
+                        applyTransform();
+                    }, { passive: true });
+
+                    var endTouch = function () { touchActive = false; };
+                    carousel.addEventListener('touchend', endTouch, { passive: true });
+                    carousel.addEventListener('touchcancel', endTouch, { passive: true });
+
+                    // --- Teclado: setas pausam por um instante e deslocam ---
+                    carousel.setAttribute('tabindex', '0');
+                    carousel.addEventListener('keydown', function (e) {
+                        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+                        e.preventDefault();
+                        offset = normalize(offset + (e.key === 'ArrowLeft' ? -60 : 60));
+                        applyTransform();
+                    });
+                }
+            } catch (err) {
+                console.warn('[Lumière] marquee:', err);
+            }
+
+            // ================================================================
+            // 3) REVEAL — entrada editorial única por seção
+            //    Um IntersectionObserver para o site inteiro; dispara uma vez.
+            // ================================================================
+            try {
+                var revealTargets = document.querySelectorAll('[data-reveal]');
+
+                if (reduceMotionQuery.matches || !('IntersectionObserver' in window)) {
+                    for (var r = 0; r < revealTargets.length; r++) {
+                        revealTargets[r].classList.add('is-revealed');
+                    }
+                } else {
+                    var revealObserver = new IntersectionObserver(function (entries, obs) {
+                        for (var e2 = 0; e2 < entries.length; e2++) {
+                            if (!entries[e2].isIntersecting) continue;
+                            entries[e2].target.classList.add('is-revealed');
+                            obs.unobserve(entries[e2].target);
+                        }
+                    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+                    for (var v = 0; v < revealTargets.length; v++) {
+                        revealObserver.observe(revealTargets[v]);
+                    }
+                }
+            } catch (err) {
+                console.warn('[Lumière] reveal:', err);
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>
