@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História — Lumière Hair Salon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: {
+                            DEFAULT: '#FBF9F5',
+                            50: '#FFFFFF',
+                            100: '#F9F6F0',
+                            200: '#F3EFE6',
+                            300: '#E6DFD1',
+                        },
+                        terracotta: {
+                            DEFAULT: '#C47A5C',
+                            light: '#D49275',
+                            dark: '#A65D3F',
+                        },
+                        brandBrown: '#3A3331',
+                        warmBeige: '#EFE8DE',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>.serif-heading{font-family:Cormorant Garamond,serif}:root{--ease-editorial:cubic-bezier(.16, 1, .3, 1);--ease-soft:cubic-bezier(.25, .46, .45, .94)}html.js [data-reveal]{opacity:0;transform:translate3d(0, var(--rv-y,18px), 0);transition:opacity var(--rv-dur,.9s) var(--ease-editorial) var(--rv-delay,0s), transform var(--rv-dur,.9s) var(--ease-editorial) var(--rv-delay,0s);will-change:opacity, transform}html.js [data-reveal=label]{--rv-y:12px;--rv-dur:.75s}html.js [data-reveal=title]{--rv-y:22px;--rv-dur:1s}html.js [data-reveal=text]{--rv-y:15px;--rv-dur:.85s}html.js [data-reveal=cta]{--rv-y:12px;--rv-dur:.75s}html.js [data-reveal=card]{--rv-y:26px;--rv-dur:.9s}html.js [data-reveal=image]{--rv-y:20px;--rv-dur:1.1s;--rv-scale:.975;transform:translate3d(0, var(--rv-y), 0) scale(var(--rv-scale,.98))}html.js [data-reveal].is-revealed{opacity:1;will-change:auto;transform:translate(0,0)scale(1)}html.js [data-d="1"]{--rv-delay:80ms}html.js [data-d="2"]{--rv-delay:.16s}html.js [data-d="3"]{--rv-delay:.24s}html.js [data-d="4"]{--rv-delay:.32s}html.js [data-d="5"]{--rv-delay:.4s}.btn-motion{transition:transform .4s var(--ease-soft), background-color .4s var(--ease-soft), box-shadow .4s var(--ease-soft), color .4s var(--ease-soft);will-change:transform}.btn-motion:hover{transform:translateY(-2px)}.btn-motion:active{transform:translateY(0)}.btn-motion .icon-arrow{transition:transform .4s var(--ease-soft);display:inline-block}.btn-motion:hover .icon-arrow{transform:translate(4px)}.link-editorial{transition:color .4s var(--ease-soft);display:inline-block;position:relative}.link-editorial:after{content:"";opacity:.35;transform-origin:100%;width:100%;height:1px;transition:transform .5s var(--ease-editorial);background:currentColor;position:absolute;bottom:-3px;left:0;transform:scaleX(0)}.link-editorial:hover:after,.link-editorial:focus-visible:after{transform-origin:0;opacity:.9;transform:scaleX(1)}@media (prefers-reduced-motion:reduce){html.js [data-reveal]{opacity:1!important;transition:none!important;transform:none!important}.btn-motion{transition:none!important;transform:none!important}.btn-motion .icon-arrow{transform:none!important}}</style>
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
+</head>
+<body class="bg-[#FBF9F5] text-[#3A3331] font-sans antialiased overflow-x-hidden selection:bg-[#C47A5C] selection:text-white">
+
+    <!-- 1. HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-[#FBF9F5]/90 backdrop-blur-md border-b border-[#E6DFD1]/40 py-5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+            <!-- Voltar -->
+            <a href="/" class="text-xs uppercase tracking-[0.2em] font-semibold text-[#3A3331] hover:text-[#C47A5C] transition-colors flex items-center space-x-2">
+                <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                <span>Voltar ao site</span>
+            </a>
+
+            <!-- Logo -->
+            <a href="/" class="flex flex-col items-center">
+                <span class="serif-heading text-2xl lg:text-3xl font-semibold tracking-[0.2em] uppercase text-[#3A3331]">Lumière</span>
+                <span class="text-[9px] tracking-[0.35em] text-[#C47A5C] uppercase font-medium -mt-1">Hair Salon</span>
+            </a>
+
+            <!-- CTA Agendar -->
+            <a href="/#booking" class="btn-motion hidden sm:inline-flex items-center space-x-3 bg-[#C47A5C] hover:bg-[#A65D3F] text-white text-xs uppercase tracking-[0.2em] font-medium px-6 py-2.5 rounded-full shadow-sm">
+                <span>Agendar Horário</span>
+                <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. HERO DA HISTÓRIA -->
+    <section class="pt-40 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <div class="lg:col-span-7 flex flex-col items-start" data-reveal="text" data-d="1">
+                    <span class="text-[11px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold mb-4">
+                        Nossa História
+                    </span>
+                    <h1 class="serif-heading text-4xl sm:text-6xl lg:text-7xl font-normal leading-[1.08] text-[#3A3331] mb-8">
+                        Uma história construída <br>
+                        <span class="italic text-[#C47A5C]">com cuidado.</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-[#3A3331]/80 font-light leading-relaxed max-w-xl">
+                        O Lumière nasceu com o propósito de transformar o momento de cuidar dos cabelos em uma experiência de beleza, confiança e bem-estar. Criamos um refúgio pensado para desacelerar o tempo e realçar o que existe de mais autêntico em você.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-5" data-reveal="image" data-d="2">
+                    <div class="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden shadow-2xl bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=1200" alt="Espaço Lumière" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. LINHA DO TEMPO -->
+    <section class="py-20 lg:py-32 bg-[#F9F6F0] border-y border-[#E6DFD1]/60">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12">
+            
+            <div class="text-center max-w-xl mx-auto mb-20 lg:mb-28" data-reveal="text" data-d="1">
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold block mb-3">Trajetória</span>
+                <h2 class="serif-heading text-4xl sm:text-5xl font-normal text-[#3A3331]">De onde viemos.</h2>
+            </div>
+
+            <!-- Timeline Structure -->
+            <div class="relative border-l border-[#C47A5C]/30 ml-4 sm:ml-32 space-y-16 lg:space-y-24">
+                
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-8 sm:pl-12 group" data-reveal="text" data-d="1">
+                    <!-- Dot -->
+                    <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#C47A5C] ring-4 ring-[#F9F6F0]"></div>
+                    <span class="sm:absolute sm:-left-28 top-0 text-sm font-semibold tracking-wider text-[#C47A5C] block mb-2 sm:mb-0">2018</span>
+                    <h3 class="serif-heading text-2xl sm:text-3xl text-[#3A3331] mb-3">O início</h3>
+                    <p class="text-sm sm:text-base text-[#3A3331]/70 leading-relaxed font-light">
+                        Abertura do primeiro espaço boutique com apenas duas cadeiras e um desejo imenso: criar um atendimento intimista onde cada cliente fosse ouvida com atenção e carinho genuínos.
+                    </p>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-8 sm:pl-12 group" data-reveal="text" data-d="2">
+                    <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#C47A5C] ring-4 ring-[#F9F6F0]"></div>
+                    <span class="sm:absolute sm:-left-28 top-0 text-sm font-semibold tracking-wider text-[#C47A5C] block mb-2 sm:mb-0">2020</span>
+                    <h3 class="serif-heading text-2xl sm:text-3xl text-[#3A3331] mb-3">Primeiros passos</h3>
+                    <p class="text-sm sm:text-base text-[#3A3331]/70 leading-relaxed font-light">
+                        Consolidação dos nossos tratamentos exclusivos e expansão da equipe com profissionais que compartilham do mesmo olhar artístico e compromisso com a saúde capilar.
+                    </p>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-8 sm:pl-12 group" data-reveal="text" data-d="3">
+                    <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#C47A5C] ring-4 ring-[#F9F6F0]"></div>
+                    <span class="sm:absolute sm:-left-28 top-0 text-sm font-semibold tracking-wider text-[#C47A5C] block mb-2 sm:mb-0">2022</span>
+                    <h3 class="serif-heading text-2xl sm:text-3xl text-[#3A3331] mb-3">Um novo momento</h3>
+                    <p class="text-sm sm:text-base text-[#3A3331]/70 leading-relaxed font-light">
+                        Mudança para o atual endereço na Beauty Lane. Um projeto arquitetônico minimalista e caloroso, desenhado para ser uma extensão da sua casa e um templo de descompressão.
+                    </p>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="relative pl-8 sm:pl-12 group" data-reveal="text" data-d="4">
+                    <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#C47A5C] ring-4 ring-[#F9F6F0]"></div>
+                    <span class="sm:absolute sm:-left-28 top-0 text-sm font-semibold tracking-wider text-[#C47A5C] block mb-2 sm:mb-0">2024</span>
+                    <h3 class="serif-heading text-2xl sm:text-3xl text-[#3A3331] mb-3">Mais do que um salão</h3>
+                    <p class="text-sm sm:text-base text-[#3A3331]/70 leading-relaxed font-light">
+                        Criação da nossa linha própria de rituais orgânicos e sustentáveis, integrando aromaterapia, massagem craniana e tecnologias de ponta em bio-reconstrução capilar.
+                    </p>
+                </div>
+
+                <!-- Timeline Item 5 -->
+                <div class="relative pl-8 sm:pl-12 group" data-reveal="text" data-d="5">
+                    <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#C47A5C] ring-4 ring-[#F9F6F0]"></div>
+                    <span class="sm:absolute sm:-left-28 top-0 text-sm font-semibold tracking-wider text-[#C47A5C] block mb-2 sm:mb-0">Hoje</span>
+                    <h3 class="serif-heading text-2xl sm:text-3xl text-[#3A3331] mb-3">O Lumière hoje</h3>
+                    <p class="text-sm sm:text-base text-[#3A3331]/70 leading-relaxed font-light">
+                        Uma comunidade de clientes que confiam suas melhores versões a nós diariamente. Continuamos fiéis à essência que nos trouxe até aqui: excelência, escuta e amor pelo que fazemos.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. MOMENTOS / FOTOGRAFIAS (Assimétrica) -->
+    <section class="py-24 lg:py-36 bg-[#FBF9F5] overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-end mb-16">
+                <!-- Imagem Principal (Grande) -->
+                <div class="lg:col-span-8" data-reveal="image" data-d="1">
+                    <div class="relative w-full aspect-[16/10] rounded-[32px] overflow-hidden shadow-xl bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=1200" alt="Processo de styling no Lumière" class="w-full h-full object-cover">
+                    </div>
+                    <span class="block mt-4 text-xs tracking-wider text-[#3A3331]/50 uppercase font-medium">Atenção absoluta aos mínimos detalhes</span>
+                </div>
+
+                <!-- Imagem Secundária (Menor) -->
+                <div class="lg:col-span-4" data-reveal="image" data-d="2">
+                    <div class="relative w-full aspect-square rounded-[28px] overflow-hidden shadow-lg bg-[#E6DFD1]">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800" alt="Cuidado com fios e produtos" class="w-full h-full object-cover">
+                    </div>
+                    <span class="block mt-4 text-xs tracking-wider text-[#3A3331]/50 uppercase font-medium">Cuidado personalizado</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. VALORES -->
+    <section class="py-24 lg:py-32 bg-[#F3EFE6]/40 border-t border-[#E6DFD1]/60">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            
+            <div class="max-w-xl mb-16 lg:mb-24" data-reveal="text" data-d="1">
+                <span class="text-[10px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold block mb-3">Nossos Pilares</span>
+                <h2 class="serif-heading text-4xl sm:text-5xl font-normal text-[#3A3331]">Mais do que beleza.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+                
+                <div class="flex flex-col items-start space-y-3" data-reveal="text" data-d="1">
+                    <span class="text-xs uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">01</span>
+                    <h3 class="serif-heading text-2xl text-[#3A3331]">Cuidado</h3>
+                    <p class="text-sm text-[#3A3331]/70 leading-relaxed font-light">
+                        Cada atendimento começa com atenção aos detalhes e uma consultoria personalizada que respeita seu tempo e seus fios.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-start space-y-3" data-reveal="text" data-d="2">
+                    <span class="text-xs uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">02</span>
+                    <h3 class="serif-heading text-2xl text-[#3A3331]">Confiança</h3>
+                    <p class="text-sm text-[#3A3331]/70 leading-relaxed font-light">
+                        Construímos relações duradouras com nossas clientes, baseadas em transparência, técnica apurada e respeito.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-start space-y-3" data-reveal="text" data-d="3">
+                    <span class="text-xs uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">03</span>
+                    <h3 class="serif-heading text-2xl text-[#3A3331]">Excelência</h3>
+                    <p class="text-sm text-[#3A3331]/70 leading-relaxed font-light">
+                        Técnica, experiência contínua e produtos de padrão internacional para entregar resultados sempre impecáveis.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-start space-y-3" data-reveal="text" data-d="4">
+                    <span class="text-xs uppercase tracking-[0.2em] font-semibold text-[#C47A5C]">04</span>
+                    <h3 class="serif-heading text-2xl text-[#3A3331]">Bem-estar</h3>
+                    <p class="text-sm text-[#3A3331]/70 leading-relaxed font-light">
+                        Um ambiente pensado para desacelerar a rotina, respirar fundo e aproveitar a sua própria companhia.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. ENCERRAMENTO -->
+    <section class="py-24 lg:py-36 bg-[#3A3331] text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center flex flex-col items-center" data-reveal="text" data-d="1">
+            
+            <span class="text-[11px] uppercase tracking-[0.3em] text-[#D49275] font-semibold mb-6">
+                O Próximo Passo
+            </span>
+            
+            <h2 class="serif-heading text-4xl sm:text-6xl lg:text-7xl font-normal leading-tight mb-8">
+                E a nossa história <br>
+                <span class="italic text-[#D49275]">continua.</span>
+            </h2>
+
+            <p class="text-sm sm:text-base text-white/70 max-w-lg mb-12 font-light leading-relaxed">
+                Venha viver a experiência Lumière de perto e fazer parte dos nossos próximos capítulos. Estamos prontas para receber você.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <a href="/#booking" class="btn-motion inline-flex items-center space-x-3 bg-[#C47A5C] hover:bg-[#A65D3F] text-white text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-full shadow-lg">
+                    <span>Agendar Meu Horário</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+                </a>
+                
+                <a href="/" class="link-editorial text-xs uppercase tracking-[0.2em] font-medium text-white/80 hover:text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                    <span>Voltar ao Site</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#3A3331] text-white/60 py-8 border-t border-white/10 text-center text-xs">
+        <p>© 2026 Lumière Hair Salon. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- SMOOTH SCROLLING (LENIS) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+    <script>
+        (function() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1,
+            });
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        })();
+
+        // Reveal Observer
+        (function () {
+            var items = document.querySelectorAll('[data-reveal]');
+            if (!items.length) return;
+            if (!('IntersectionObserver' in window)) {
+                items.forEach(function (el) { el.classList.add('is-revealed'); });
+                return;
+            }
+            var obs = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -8% 0px' });
+            items.forEach(function (el) { obs.observe(el); });
+        })();
+    </script>
+</body>
+</html>
