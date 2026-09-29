@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Painel — Lumière Hair Salon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: {
+                            DEFAULT: '#FBF9F5',
+                            50: '#FFFFFF',
+                            100: '#F9F6F0',
+                            200: '#F3EFE6',
+                            300: '#E6DFD1',
+                        },
+                        terracotta: {
+                            DEFAULT: '#C47A5C',
+                            light: '#D49275',
+                            dark: '#A65D3F',
+                        },
+                        brandBrown: '#3A3331',
+                        warmBeige: '#EFE8DE',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .serif-heading { font-family: 'Cormorant Garamond', serif; }
+
+        /* --- Reveal --- */
+        html.js [data-reveal] {
+            opacity: 0;
+            transform: translate3d(0, var(--rv-y, 18px), 0);
+            transition:
+                opacity var(--rv-dur, 0.9s) var(--ease-editorial) var(--rv-delay, 0s),
+                transform var(--rv-dur, 0.9s) var(--ease-editorial) var(--rv-delay, 0s);
+        }
+        html.js [data-reveal="label"] { --rv-y: 12px; --rv-dur: 0.75s; }
+        html.js [data-reveal="title"] { --rv-y: 22px; --rv-dur: 1s; }
+        html.js [data-reveal="text"]  { --rv-y: 15px; --rv-dur: 0.85s; }
+        html.js [data-reveal="card"]  { --rv-y: 26px; --rv-dur: 0.9s; }
+        html.js [data-reveal].is-revealed {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+        html.js [data-d="1"] { --rv-delay: 0.08s; }
+        html.js [data-d="2"] { --rv-delay: 0.16s; }
+        html.js [data-d="3"] { --rv-delay: 0.24s; }
+        html.js [data-d="4"] { --rv-delay: 0.32s; }
+
+        /* --- Botões --- */
+        .btn-motion {
+            transition:
+                transform 0.4s var(--ease-soft),
+                background-color 0.4s var(--ease-soft),
+                color 0.4s var(--ease-soft),
+                border-color 0.4s var(--ease-soft);
+        }
+        .btn-motion:hover { transform: translateY(-2px); }
+        .btn-motion:active { transform: translateY(0); }
+        .btn-motion .icon-arrow {
+            display: inline-block;
+            transition: transform 0.4s var(--ease-soft);
+        }
+        .btn-motion:hover .icon-arrow { transform: translateX(4px); }
+
+        /* --- Campos --- */
+        .adm-input,
+        .adm-select {
+            width: 100%;
+            background: #FFFFFF;
+            border: 1px solid #E6DFD1;
+            border-radius: 10px;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.82rem;
+            color: #3A3331;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-appearance: none;
+            appearance: none;
+            transition: border-color 0.3s var(--ease-soft), box-shadow 0.3s var(--ease-soft);
+        }
+        .adm-input:focus,
+        .adm-select:focus {
+            outline: none;
+            border-color: rgba(196, 122, 92, 0.75);
+            box-shadow: 0 0 0 3px rgba(196, 122, 92, 0.13);
+        }
+        .adm-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23C47A5C' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M1 1.75 6 6.25 11 1.75'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.85rem center;
+            background-size: 10px 7px;
+            padding-right: 2.25rem;
+            cursor: pointer;
+        }
+        .adm-label {
+            display: block;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 600;
+            color: #3A3331;
+            margin-bottom: 0.4rem;
+        }
+
+        /* --- Linha da agenda --- */
+        .adm-row {
+            transition: background-color 0.35s var(--ease-soft);
+        }
+        .adm-row:hover { background-color: rgba(243, 239, 230, 0.55); }
+        .adm-row.is-updating { opacity: 0.55; }
+
+        /* --- Badge de status --- */
+        .adm-badge {
+            display: inline-block;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+            padding: 0.3rem 0.55rem;
+            border-radius: 999px;
+        }
+        .adm-badge[data-status="confirmado"] { background: rgba(196,122,92,0.12); color: #A65D3F; }
+        .adm-badge[data-status="concluido"]  { background: rgba(58,51,49,0.10);  color: #3A3331; }
+        .adm-badge[data-status="faltou"]     { background: rgba(139,109,90,0.16); color: #8B6D5A; }
+        .adm-badge[data-status="cancelado"]  { background: rgba(58,51,49,0.06);  color: rgba(58,51,49,0.55); }
+
+        /* --- Linha do tempo do dia --- */
+        .adm-tl-item { position: relative; padding-left: 1.75rem; }
+        .adm-tl-item::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 0.55rem;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #C47A5C;
+        }
+        .adm-tl-item::after {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 1.35rem;
+            bottom: -0.75rem;
+            width: 1px;
+            background: #E6DFD1;
+        }
+        .adm-tl-item:last-child::after { display: none; }
+        .adm-tl-item[data-status="cancelado"] { opacity: 0.5; }
+        .adm-tl-item[data-status="cancelado"]::before { background: rgba(58,51,49,0.25); }
+
+        /* --- Login --- */
+        .adm-fade { animation: admFade 0.5s var(--ease-editorial) both; }
+        @keyframes admFade {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Foco visível --- */
+        :focus-visible {
+            outline: 2px solid #C47A5C;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html.js [data-reveal] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .btn-motion { transform: none !important; transition: none !important; }
+            .adm-fade { animation: none !important; }
+        }
+    </style>
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
+    <!-- Credenciais via variáveis de ambiente do Vite (mesma fonte da Home). -->
+    <script type="module">
+        window.LUMIERE_ENV = {
+            SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL || '',
+            SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+        };
+    </script>
+</head>
+<body class="bg-[#F9F6F0] text-[#3A3331] font-sans antialiased min-h-screen">
+
+    <!-- ===================== LOGIN ===================== -->
+    <section id="login-view" class="min-h-screen flex items-center justify-center px-6 py-20">
+        <div class="w-full max-w-sm" data-reveal="card" data-d="1">
+
+            <div class="flex flex-col items-center text-center mb-10">
+                <span class="serif-heading text-3xl font-semibold tracking-[0.2em] uppercase text-[#3A3331]">Lumière</span>
+                <span class="text-[9px] tracking-[0.35em] text-[#C47A5C] uppercase font-medium -mt-1">Hair Salon</span>
+                <h1 class="serif-heading text-2xl font-normal mt-8 mb-2">Painel administrativo</h1>
+                <p class="text-xs text-[#3A3331]/60">Acesso restrito à equipe do salão.</p>
+            </div>
+
+            <form id="login-form" class="bg-white rounded-2xl border border-[#E6DFD1]/60 shadow-sm p-6 sm:p-8" novalidate>
+                <div class="mb-5">
+                    <label class="adm-label" for="login-email">E-mail</label>
+                    <input id="login-email" type="email" autocomplete="username"
+                           class="adm-input" placeholder="voce@lumierehairsalon.com">
+                </div>
+
+                <div class="mb-6">
+                    <label class="adm-label" for="login-password">Senha</label>
+                    <input id="login-password" type="password" autocomplete="current-password"
+                           class="adm-input" placeholder="••••••••">
+                </div>
+
+                <p id="login-error" class="text-xs text-[#A65D3F] mb-4 hidden"></p>
+
+                <button type="submit" id="login-btn"
+                        class="btn-motion w-full inline-flex items-center justify-center space-x-3 bg-[#C47A5C] hover:bg-[#A65D3F] text-white text-xs uppercase tracking-[0.2em] font-semibold px-6 py-3.5 rounded-full">
+                    <span>Entrar</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] icon-arrow"></i>
+                </button>
+
+                <a href="/" class="block text-center mt-6 text-[10px] uppercase tracking-[0.15em] text-[#3A3331]/50 hover:text-[#C47A5C] transition-colors">
+                    <i class="fa-solid fa-arrow-left text-[9px] mr-2"></i>
+                    Voltar ao site
+                </a>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- ===================== PAINEL ===================== -->
+    <div id="panel-view" hidden>
+
+        <!-- Header -->
+        <header class="bg-[#3A3331] text-white">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="h-20 flex items-center justify-between">
+                    <a href="/" class="flex flex-col">
+                        <span class="serif-heading text-xl font-semibold tracking-[0.2em] uppercase text-white">Lumière</span>
+                        <span class="text-[8px] tracking-[0.35em] text-[#D49275] uppercase font-medium -mt-0.5">Painel</span>
+                    </a>
+
+                    <div class="flex items-center gap-4">
+                        <span id="admin-email" class="hidden sm:inline text-[11px] text-white/50"></span>
+                        <button type="button" id="logout-btn"
+                                class="text-[10px] uppercase tracking-[0.15em] text-white/70 hover:text-white transition-colors inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-arrow-right-from-bracket text-[10px]"></i>
+                            <span>Sair</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-6 lg:px-12 py-10 lg:py-14">
+
+            <!-- Título + Resumo -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+                <div data-reveal="text" data-d="1">
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-[#C47A5C] font-semibold block mb-2">Agenda</span>
+                    <h1 class="serif-heading text-4xl lg:text-5xl font-normal leading-tight">Compromissos do dia</h1>
+                </div>
+
+                <div class="flex gap-6 sm:gap-8" data-reveal="text" data-d="2">
+                    <div>
+                        <span class="block text-[9px] uppercase tracking-[0.15em] text-[#3A3331]/45 font-semibold">Total</span>
+                        <span id="stat-total" class="serif-heading text-3xl text-[#3A3331]">—</span>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] uppercase tracking-[0.15em] text-[#3A3331]/45 font-semibold">Confirmados</span>
+                        <span id="stat-confirmados" class="serif-heading text-3xl text-[#C47A5C]">—</span>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] uppercase tracking-[0.15em] text-[#3A3331]/45 font-semibold">Concluídos</span>
+                        <span id="stat-concluidos" class="serif-heading text-3xl text-[#3A3331]/70">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="bg-white rounded-2xl border border-[#E6DFD1]/60 shadow-sm p-5 sm:p-6 mb-8" data-reveal="card" data-d="3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                    <div>
+                        <label class="adm-label" for="filter-date">Data</label>
+                        <input id="filter-date" type="date" class="adm-input">
+                    </div>
+
+                    <div>
+                        <label class="adm-label" for="filter-profissional">Profissional</label>
+                        <select id="filter-profissional" class="adm-select">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="adm-label" for="filter-status">Status</label>
+                        <select id="filter-status" class="adm-select">
+                            <option value="">Todos</option>
+                            <option value="confirmado">Confirmado</option>
+                            <option value="concluido">Concluído</option>
+                            <option value="faltou">Faltou</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-end">
+                        <div class="flex gap-2 w-full">
+                            <button type="button" id="prev-day"
+                                    class="btn-motion inline-flex items-center justify-center w-11 h-10 border border-[#E6DFD1] rounded-lg text-[#3A3331]/60 hover:border-[#C47A5C] hover:text-[#C47A5C] transition-colors"
+                                    aria-label="Dia anterior">
+                                <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                            </button>
+                            <button type="button" id="today-btn"
+                                    class="btn-motion flex-1 bg-[#3A3331] hover:bg-[#C47A5C] text-white text-[10px] uppercase tracking-[0.15em] font-semibold px-4 py-3 rounded-lg">
+                                Hoje
+                            </button>
+                            <button type="button" id="next-day"
+                                    class="btn-motion inline-flex items-center justify-center w-11 h-10 border border-[#E6DFD1] rounded-lg text-[#3A3331]/60 hover:border-[#C47A5C] hover:text-[#C47A5C] transition-colors"
+                                    aria-label="Próximo dia">
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Estado de carregamento -->
+            <div id="loading-state" class="text-center py-16">
+                <i class="fa-solid fa-circle-notch fa-spin text-[#C47A5C] text-lg"></i>
+                <p class="text-xs text-[#3A3331]/50 mt-4">Carregando agenda…</p>
+            </div>
+
+            <!-- Estado vazio -->
+            <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-[#E6DFD1]/60">
+                <i class="fa-regular fa-calendar text-[#C47A5C]/50 text-2xl mb-4"></i>
+                <p class="serif-heading text-2xl text-[#3A3331] mb-2">Nenhum compromisso</p>
+                <p class="text-xs text-[#3A3331]/50">Não há agendamentos para os filtros selecionados.</p>
+            </div>
+
+            <!-- Tabela (desktop) -->
+            <div id="table-wrap" class="hidden bg-white rounded-2xl border border-[#E6DFD1]/60 shadow-sm overflow-hidden">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-[#E6DFD1]">
+                            <th class="px-5 py-4 text-[9px] uppercase tracking-[0.15em] font-semibold text-[#3A3331]/50">Horário</th>
+                            <th class="px-5 py-4 text-[9px] uppercase tracking-[0.15em] font-semibold text-[#3A3331]/50">Cliente</th>
+                            <th class="px-5 py-4 text-[9px] uppercase tracking-[0.15em] font-semibold text-[#3A3331]/50">Serviço</th>
+                            <th class="px-5 py-4 text-[9px] uppercase tracking-[0.15em] font-semibold text-[#3A3331]/50">Profissional</th>
+                            <th class="px-5 py-4 text-[9px] uppercase tracking-[0.15em] font-semibold text-[#3A3331]/50">Observações</th>
+                            <th class="px-5 py-4 text-[9px] uppercase tracking-[0.15em] font-semibold text-[#3A3331]/50">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Cards (mobile) -->
+            <div id="cards-wrap" class="hidden space-y-4"></div>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        /* ==================================================================
+           PAINEL ADMINISTRATIVO — Lumière
+           Segurança: não há senha no frontend. O login usa Supabase Auth
+           (email + senha) e TODA a proteção real vive no RLS do banco.
+           Se o auth.uid() não estiver na allowlist public.admin_users,
+           as policies negam tudo e a tela fica vazia.
+           ================================================================== */
+        (function () {
+            'use strict';
+
+            var ENV = window.LUMIERE_ENV || {};
+            var TZ = 'America/Sao_Paulo';
+
+            var STATUS = {
+                confirmado: 'Confirmado',
+                concluido: 'Concluído',
+                faltou: 'Faltou',
+                cancelado: 'Cancelado'
+            };
+
+            var loginView = document.getElementById('login-view');
+            var panelView = document.getElementById('panel-view');
+            var loginForm = document.getElementById('login-form');
+            var loginBtn = document.getElementById('login-btn');
+            var loginError = document.getElementById('login-error');
+            var logoutBtn = document.getElementById('logout-btn');
+            var adminEmail = document.getElementById('admin-email');
+
+            var filterDate = document.getElementById('filter-date');
+            var filterPro = document.getElementById('filter-profissional');
+            var filterStatus = document.getElementById('filter-status');
+
+            var loadingState = document.getElementById('loading-state');
+            var emptyState = document.getElementById('empty-state');
+            var tableWrap = document.getElementById('table-wrap');
+            var cardsWrap = document.getElementById('cards-wrap');
+            var tableBody = document.getElementById('table-body');
+
+            var supa = null;
+            var session = null;
+            var isAdmin = false;
+            var catalogPro = {};   // id -> nome
+
+            function hasEnv() {
+                return !!(ENV.SUPABASE_URL && ENV.SUPABASE_ANON_KEY);
+            }
+
+            function todayISO() {
+                // Data local de São Paulo, não do fuso da máquina.
+                try {
+                    return new Intl.DateTimeFormat('en-CA', {
+                        timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit'
+                    }).format(new Date());
+                } catch (e) {
+                    return new Date().toISOString().slice(0, 10);
+                }
+            }
+
+            function showLoginError(msg) {
+                loginError.textContent = msg;
+                loginError.classList.remove('hidden');
+            }
+
+            function clearLoginError() {
+                loginError.classList.remove('hidden');
+                loginError.textContent = '';
+            }
+
+            /* ---------------- Autenticação ---------------- */
+
+            function enterPanel(user) {
+                loginView.hidden = true;
+                panelView.hidden = false;
+                if (adminEmail) {
+                    adminEmail.textContent = (user && user.email) ? user.email : '';
+                }
+            }
+
+            function leavePanel() {
+                loginView.hidden = false;
+                panelView.hidden = true;
+            }
+
+            // Confirma se o usuário logado está na allowlist admin_users.
+            // A policy real está no banco; isso aqui é só UX.
+            function checkAdmin(userId) {
+                return supa
+                    .from('admin_users')
+                    .select('user_id')
+                    .eq('user_id', userId)
+                    .eq('ativo', true)
+                    .maybeSingle()
+                    .then(function (res) {
+                        if (res.error) {
+                            console.error('[admin] falha ao verificar allowlist:', res.error);
+                            return false;
+                        }
+                        return !!res.data;
+                    });
+            }
+
+            function handleAuth(authState) {
+                session = authState.session;
+                var user = authState.user;
+
+                if (!user) {
+                    isAdmin = false;
+                    leavePanel();
+                    return;
+                }
+
+                checkAdmin(user.id).then(function (ok) {
+                    isAdmin = ok;
+                    if (ok) {
+                        enterPanel(user);
+                        loadProFilter();
+                        loadAgenda();
+                    } else {
+                        console.warn('[admin] usuário autenticado SEM acesso ao painel');
+                        // Sai da sessão: a conta existe mas não é admin.
+                        supa.auth.signOut();
+                    }
+                });
+            }
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    clearLoginError();
+
+                    var email = document.getElementById('login-email').value.trim();
+                    var password = document.getElementById('login-password').value;
+
+                    if (!email || !password) {
+                        showLoginError('Informe e-mail e senha.');
+                        return;
+                    }
+
+                    loginBtn.disabled = true;
+                    loginBtn.style.opacity = '0.7';
+
+                    supa.auth.signInWithPassword({ email: email, password: password })
+                        .then(function (res) {
+                            if (res.error) {
+                                // Mensagem genérica: não revela se o e-mail existe.
+                                showLoginError('E-mail ou senha incorretos.');
+                                console.warn('[admin] login falhou:', res.error.message);
+                            }
+                        })
+                        .finally(function () {
+                            loginBtn.disabled = false;
+                            loginBtn.style.opacity = '1';
+                        });
+                });
+            }
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    supa.auth.signOut();
+                });
+            }
+
+            /* ---------------- Dados ---------------- */
+
+            function formatTime(iso) {
+                try {
+                    return new Intl.DateTimeFormat('pt-BR', {
+                        timeZone: TZ, hour: '2-digit', minute: '2-digit'
+                    }).format(new Date(iso));
+                } catch (e) {
+                    return '--:--';
+                }
+            }
+
+            function formatRange(row) {
+                return formatTime(row.inicio) + ' – ' + formatTime(row.fim);
+            }
+
+            function phoneHref(tel) {
+                var digits = String(tel || '').replace(/\D/g, '');
+                if (!digits) return null;
+                return 'https://wa.me/55' + digits;
+            }
+
+            function loadProFilter() {
+                supa
+                    .from('profissionais')
+                    .select('id, nome')
+                    .eq('ativo', true)
+                    .order('nome', { ascending: true })
+                    .then(function (res) {
+                        if (res.error) {
+                            console.error('[admin] falha ao carregar profissionais:', res.error);
+                            return;
+                        }
+                        (res.data || []).forEach(function (p) {
+                            catalogPro[p.id] = p.nome;
+                        });
+                        filterPro.innerHTML = '<option value="">Todos</option>';
+                        (res.data || []).forEach(function (p) {
+                            var o = document.createElement('option');
+                            o.value = p.id;
+                            o.textContent = p.nome;
+                            filterPro.appendChild(o);
+                        });
+                    });
+            }
+
+            function currentQuery() {
+                var q = supa
+                    .from('agendamentos')
+                    .select('id, inicio, fim, cliente_nome, telefone, observacoes, status, servico_id, profissional_id, servicos(nome), profissionais(nome)');
+
+                if (filterDate.value) {
+                    // Dia em America/Sao_Paulo (-03:00, sem horário de verão desde 2019).
+                    // O fim é calculado em UTC para não depender do fuso do servidor.
+                    var d = filterDate.value;
+                    var end = new Date(d + 'T00:00:00-03:00');
+                    end.setDate(end.getDate() + 1);
+                    q = q
+                        .gte('inicio', d + 'T00:00:00-03:00')
+                        .lt('inicio', end.toISOString());
+                }
+
+                if (filterPro.value) q = q.eq('profissional_id', filterPro.value);
+                if (filterStatus.value) q = q.eq('status', filterStatus.value);
+
+                return q.order('inicio', { ascending: true });
+            }
+
+            function loadAgenda() {
+                if (!isAdmin) return;
+
+                loadingState.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                tableWrap.classList.add('hidden');
+                cardsWrap.classList.add('hidden');
+
+                currentQuery()
+                    .then(function (res) {
+                        loadingState.classList.add('hidden');
+
+                        if (res.error) {
+                            console.error('[admin] falha ao carregar agenda:', res.error);
+                            emptyState.classList.remove('hidden');
+                            emptyState.querySelector('p:last-child').textContent =
+                                'Não foi possível carregar a agenda. Tente novamente.';
+                            return;
+                        }
+
+                        var rows = res.data || [];
+                        renderStats(rows);
+                        renderRows(rows);
+                    });
+            }
+
+            function renderStats(rows) {
+                var total = rows.length;
+                var conf = rows.filter(function (r) { return r.status === 'confirmado'; }).length;
+                var conc = rows.filter(function (r) { return r.status === 'concluido'; }).length;
+                document.getElementById('stat-total').textContent = total;
+                document.getElementById('stat-confirmados').textContent = conf;
+                document.getElementById('stat-concluidos').textContent = conc;
+            }
+
+            function statusSelect(row) {
+                var sel = document.createElement('select');
+                sel.className = 'adm-select';
+                sel.style.width = 'auto';
+                sel.style.minWidth = '9.5rem';
+                sel.style.fontSize = '0.7rem';
+                sel.style.padding = '0.35rem 1.9rem 0.35rem 0.6rem';
+                sel.setAttribute('aria-label', 'Alterar status do agendamento');
+
+                Object.keys(STATUS).forEach(function (key) {
+                    var o = document.createElement('option');
+                    o.value = key;
+                    o.textContent = STATUS[key];
+                    if (row.status === key) o.selected = true;
+                    sel.appendChild(o);
+                });
+
+                sel.addEventListener('change', function () {
+                    updateStatus(row, sel.value, sel);
+                });
+
+                return sel;
+            }
+
+            function updateStatus(row, newStatus, selEl) {
+                if (newStatus === row.status) return;
+
+                var tr = selEl.closest('.adm-row');
+                if (tr) tr.classList.add('is-updating');
+                selEl.disabled = true;
+
+                supa
+                    .from('agendamentos')
+                    .update({ status: newStatus })
+                    .eq('id', row.id)
+                    .then(function (res) {
+                        if (res.error) {
+                            console.error('[admin] falha ao atualizar status:', res.error);
+                            if (tr) tr.classList.remove('is-updating');
+                            selEl.disabled = false;
+                            selEl.value = row.status;
+                            return;
+                        }
+                        row.status = newStatus;
+                        // Recarrega para atualizar badges e contadores
+                        loadAgenda();
+                    });
+            }
+
+            function renderRows(rows) {
+                tableBody.innerHTML = '';
+                cardsWrap.innerHTML = '';
+
+                if (!rows.length) {
+                    emptyState.classList.remove('hidden');
+                    emptyState.querySelector('p:last-child').textContent =
+                        'Não há agendamentos para os filtros selecionados.';
+                    return;
+                }
+
+                rows.forEach(function (row) {
+                    var servico = (row.servicos && row.servicos.nome) || '—';
+                    var prof = (row.profissionais && row.profissionais.nome) || '—';
+                    var wa = phoneHref(row.telefone);
+
+                    // --- Linha de tabela (desktop) ---
+                    var tr = document.createElement('tr');
+                    tr.className = 'adm-row border-b border-[#E6DFD1]/50 last:border-0 align-top';
+                    tr.setAttribute('data-status', row.status);
+
+                    var tdTime = document.createElement('td');
+                    tdTime.className = 'px-5 py-4 whitespace-nowrap';
+                    tdTime.innerHTML = '<span class="serif-heading text-lg text-[#3A3331]">' +
+                        formatRange(row) + '</span>';
+
+                    var tdCli = document.createElement('td');
+                    tdCli.className = 'px-5 py-4';
+                    tdCli.innerHTML =
+                        '<div class="text-sm text-[#3A3331]">' + escapeHtml(row.cliente_nome) + '</div>' +
+                        (wa
+                            ? '<a href="' + wa + '" target="_blank" rel="noopener" class="text-[11px] text-[#3A3331]/50 hover:text-[#C47A5C] transition-colors">' +
+                              escapeHtml(row.telefone) + '</a>'
+                            : '<div class="text-[11px] text-[#3A3331]/50">' + escapeHtml(row.telefone) + '</div>');
+
+                    var tdServ = document.createElement('td');
+                    tdServ.className = 'px-5 py-4 text-sm text-[#3A3331]/75';
+                    tdServ.textContent = servico;
+
+                    var tdProf = document.createElement('td');
+                    tdProf.className = 'px-5 py-4 text-sm text-[#3A3331]/75';
+                    tdProf.textContent = prof;
+
+                    var tdObs = document.createElement('td');
+                    tdObs.className = 'px-5 py-4 text-xs text-[#3A3331]/60 max-w-[220px]';
+                    tdObs.textContent = row.observacoes || '—';
+
+                    var tdStat = document.createElement('td');
+                    tdStat.className = 'px-5 py-4';
+                    tdStat.appendChild(statusSelect(row));
+
+                    tr.appendChild(tdTime);
+                    tr.appendChild(tdCli);
+                    tr.appendChild(tdServ);
+                    tr.appendChild(tdProf);
+                    tr.appendChild(tdObs);
+                    tr.appendChild(tdStat);
+                    tableBody.appendChild(tr);
+
+                    // --- Card (mobile) ---
+                    var card = document.createElement('div');
+                    card.className = 'adm-row bg-white rounded-2xl border border-[#E6DFD1]/60 p-5';
+                    card.setAttribute('data-status', row.status);
+                    card.innerHTML =
+                        '<div class="flex items-start justify-between gap-4 mb-3">' +
+                            '<span class="serif-heading text-xl text-[#3A3331]">' + formatRange(row) + '</span>' +
+                            '<span class="adm-badge" data-status="' + row.status + '">' + STATUS[row.status] + '</span>' +
+                        '</div>' +
+                        '<div class="text-sm text-[#3A3331] mb-1">' + escapeHtml(row.cliente_nome) + '</div>' +
+                        (wa
+                            ? '<a href="' + wa + '" target="_blank" rel="noopener" class="text-[11px] text-[#3A3331]/50 hover:text-[#C47A5C] transition-colors mb-3 inline-block">' + escapeHtml(row.telefone) + '</a>'
+                            : '<div class="text-[11px] text-[#3A3331]/50 mb-3">' + escapeHtml(row.telefone) + '</div>') +
+                        '<div class="text-xs text-[#3A3331]/70 mb-1">' + escapeHtml(servico) + ' · ' + escapeHtml(prof) + '</div>' +
+                        (row.observacoes
+                            ? '<div class="text-xs text-[#3A3331]/50 mb-4">' + escapeHtml(row.observacoes) + '</div>'
+                            : '<div class="mb-4"></div>');
+                    var cardStatusWrap = document.createElement('div');
+                    cardStatusWrap.appendChild(statusSelect(row));
+                    card.appendChild(cardStatusWrap);
+                    cardsWrap.appendChild(card);
+                });
+
+                tableWrap.classList.remove('hidden');
+                cardsWrap.classList.remove('hidden');
+            }
+
+            function escapeHtml(str) {
+                return String(str === null || str === undefined ? '' : str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            /* ---------------- Filtros ---------------- */
+
+            function shiftDate(iso, days) {
+                var base = iso + 'T00:00:00-03:00';
+                var d = new Date(base);
+                d.setDate(d.getDate() + days);
+                // Formata em São Paulo para não escorregar de dia
+                try {
+                    return new Intl.DateTimeFormat('en-CA', {
+                        timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit'
+                    }).format(d);
+                } catch (e) {
+                    return d.toISOString().slice(0, 10);
+                }
+            }
+
+            [filterDate, filterPro, filterStatus].forEach(function (el) {
+                el.addEventListener('change', loadAgenda);
+            });
+
+            document.getElementById('prev-day').addEventListener('click', function () {
+                filterDate.value = shiftDate(filterDate.value, -1);
+                loadAgenda();
+            });
+            document.getElementById('next-day').addEventListener('click', function () {
+                filterDate.value = shiftDate(filterDate.value, 1);
+                loadAgenda();
+            });
+            document.getElementById('today-btn').addEventListener('click', function () {
+                filterDate.value = todayISO();
+                loadAgenda();
+            });
+
+            /* ---------------- Bootstrap ---------------- */
+
+            if (!hasEnv() || !window.supabase) {
+                showLoginError('Configuração ausente: verifique as variáveis de ambiente do Supabase.');
+                loginForm.querySelector('button[type="submit"]').disabled = true;
+                return;
+            }
+
+            supa = window.supabase.createClient(
+                ENV.SUPABASE_URL,
+                ENV.SUPABASE_ANON_KEY,
+                { auth: { persistSession: true, autoRefreshToken: true } }
+            );
+
+            filterDate.value = todayISO();
+
+            // Reveal pós-login
+            supa.auth.getSession().then(function (r) {
+                handleAuth({ session: r.data.session, user: r.data.session ? r.data.session.user : null });
+            });
+            supa.auth.onAuthStateChange(function (event, s) {
+                handleAuth({ session: s, user: s ? s.user : null });
+            });
+        })();
+    </script>
+</body>
+</html>

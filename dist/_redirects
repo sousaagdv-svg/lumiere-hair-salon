@@ -1,0 +1,8 @@
+# Configuração de redirecionamento para o Vite MPA (Multi-Page App) na Netlify
+# Garante que páginas estáticas como /admin.html e /sobre.html sejam servidas diretamente,
+# sem cair no fallback de SPA.
+
+/admin.html /admin.html 200
+/sobre.html /sobre.html 200
+/admin /admin.html 200
+/sobre /sobre.html 200

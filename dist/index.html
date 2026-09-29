@@ -42,6 +42,12 @@
         // Marca que o JS está ativo: evita conteúdo invisível caso o script falhe.
         document.documentElement.classList.add('js');
     </script>
+    <!-- Credenciais do Supabase injetadas pelo Vite a partir de variáveis de ambiente.
+         Nenhum valor real neste arquivo: configure o .env (veja .env.example).
+         Se as variáveis estiverem ausentes, o formulário mantém o comportamento
+         estático atual e a disponibilidade real simplesmente não é ativada. -->
+  <script type="module" crossorigin src="/assets/main-DzZ2N0X7.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-xcHio9Bv.js">
 </head>
 <body class="bg-[#F9F6F0] text-[#3A3331] font-sans antialiased selection:bg-[#C47A5C] selection:text-white">
 
@@ -518,12 +524,12 @@
 
                         <div class="booking-field lg:col-span-6" style="--bf-delay:.05s">
                             <label class="booking-label" for="bk-service">Serviço desejado</label>
-                            <select id="bk-service" name="servico" class="booking-select">
+                            <select id="bk-service" name="servico" class="booking-select" data-duration-corte="60" data-duration-color="120" data-duration-trat="60" data-duration-ext="180">
                                 <option value="">Selecione um serviço</option>
-                                <option>Corte &amp; Style</option>
-                                <option>Coloração</option>
-                                <option>Tratamentos</option>
-                                <option>Extensions</option>
+                                <option value="Corte & Style" data-dur="60">Corte & Style</option>
+                                <option value="Coloração" data-dur="120">Coloração</option>
+                                <option value="Tratamentos" data-dur="60">Tratamentos</option>
+                                <option value="Extensions" data-dur="180">Extensions</option>
                             </select>
                             <span class="booking-error">Selecione um serviço para continuar.</span>
                         </div>
@@ -532,11 +538,11 @@
                             <label class="booking-label" for="bk-professional">Profissional de preferência</label>
                             <select id="bk-professional" name="profissional" class="booking-select">
                                 <option value="">Selecione um profissional</option>
-                                <option>Sem preferência</option>
-                                <option>Ana Clara</option>
-                                <option>Beatriz</option>
-                                <option>Camila</option>
-                                <option>Juliana</option>
+                                <option value="sem-preferencia">Sem preferência</option>
+                                <option value="Ana Clara">Ana Clara</option>
+                                <option value="Beatriz">Beatriz</option>
+                                <option value="Camila">Camila</option>
+                                <option value="Juliana">Juliana</option>
                             </select>
                             <span class="booking-error">Selecione um profissional.</span>
                         </div>
@@ -623,6 +629,7 @@
         </div>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         /* ============================================================
            AGENDAMENTO — lógica do formulário
@@ -640,7 +647,18 @@
                 whatsappNumber: '551145567890',
 
                 // Mensagem de abertura da conversa
-                greeting: 'Olá! Gostaria de solicitar um agendamento na Lumière Hair Salon.'
+                greeting: 'Olá! Gostaria de solicitar um agendamento na Lumière Hair Salon.',
+
+                // ======================================================
+                // SUPABASE — lidas de window.LUMIERE_ENV, que o Vite popula
+                // a partir de VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY.
+                // Sem credenciais no código. Vazias = disponibilidade desativada.
+                // ======================================================
+                supabaseUrl: (window.LUMIERE_ENV && window.LUMIERE_ENV.SUPABASE_URL) || '',
+                supabaseAnonKey: (window.LUMIERE_ENV && window.LUMIERE_ENV.SUPABASE_ANON_KEY) || '',
+
+                // Fuso horário usado para montar os Timestamptz vindos da RPC
+                timezone: 'America/Sao_Paulo'
             };
             /* ========================================================== */
 
@@ -684,6 +702,253 @@
                 var dateInput = document.getElementById('bk-date');
                 if (dateInput) dateInput.min = toISODate(new Date());
 
+                // ==========================================================
+                // SUPABASE — catálogo (serviços/profissionais) + disponibilidade
+                // ==========================================================
+                var serviceSelect = document.getElementById('bk-service');
+                var professionalSelect = document.getElementById('bk-professional');
+                var timeSelect = document.getElementById('bk-time');
+
+                // Estado local: evita race condition quando o usuário troca
+                // de campo rapidamente enquanto uma requisição está em voo.
+                var serviceCatalog = {};   // nome -> { id, duracao_min }
+                var proCatalog = {};       // nome -> { id, nome }
+                var semPreferenciaId = null;
+                var availableSlots = [];   // [{ inicio, fim, horario, profissionalId }]
+                var requestToken = 0;      // invalida respostas obsoletas
+                var isLoading = false;
+
+                // TRUE somente quando as variáveis de ambiente chegaram preenchidas.
+                // Sem elas, o formulário mantém o comportamento original
+                // (catálogo estático no HTML) e nada é sobrescrito.
+                var supabaseReady = !!(
+                    BOOKING_CONFIG.supabaseUrl &&
+                    BOOKING_CONFIG.supabaseAnonKey
+                );
+
+                var supa = null;
+                if (supabaseReady && window.supabase) {
+                    try {
+                        supa = window.supabase.createClient(
+                            BOOKING_CONFIG.supabaseUrl,
+                            BOOKING_CONFIG.supabaseAnonKey,
+                            { auth: { persistSession: false, autoRefreshToken: false } }
+                        );
+                    } catch (e) {
+                        console.error('[booking] falha ao criar client Supabase:', e);
+                        supa = null;
+                    }
+                }
+                var useRemote = !!supa;
+
+                // Estado visual do campo Horário
+                var TIME_IDLE = 'Selecione um horário';
+                var TIME_LOADING = 'Carregando horários...';
+                var TIME_EMPTY = 'Nenhum horário disponível para esta data.';
+                var TIME_ERROR = 'Não foi possível carregar os horários. Tente novamente.';
+
+                function setTimeState(mode, label) {
+                    if (!timeSelect) return;
+                    timeSelect.innerHTML = '';
+                    var opt = document.createElement('option');
+                    opt.value = '';
+                    opt.textContent = label;
+                    opt.setAttribute('disabled', '');
+                    opt.setAttribute('selected', '');
+                    timeSelect.appendChild(opt);
+                    timeSelect.disabled = (mode === 'loading' || mode === 'empty' || mode === 'error');
+                    if (mode === 'loading') timeSelect.setAttribute('aria-busy', 'true');
+                    else timeSelect.removeAttribute('aria-busy');
+                }
+
+                // Limpa a seleção de horário (usado em toda dependência de campo)
+                function resetTime() {
+                    availableSlots = [];
+                    setTimeState('idle', TIME_IDLE);
+                    if (timeSelect) timeSelect.disabled = false;
+                }
+
+                function durationOfSelectedService() {
+                    if (!serviceSelect || !serviceSelect.value) return null;
+                    var opt = serviceSelect.selectedOptions[0];
+                    if (opt && opt.dataset.dur) return parseInt(opt.dataset.dur, 10);
+                    var fromDb = serviceCatalog[serviceSelect.value];
+                    return fromDb ? fromDb.duracao_min : null;
+                }
+
+                function professionalIdOfSelection() {
+                    if (!professionalSelect || !professionalSelect.value) return null;
+                    var nome = professionalSelect.value;
+                    if (nome === 'sem-preferencia') return semPreferenciaId;
+                    var found = proCatalog[nome];
+                    return found ? found.id : null;
+                }
+
+                function friendlyDate(iso) {
+                    // 'YYYY-MM-DD' -> 'DD/MM/YYYY' (sem passar por Date para evitar fuso)
+                    var p = String(iso).split('-');
+                    if (p.length !== 3) return iso;
+                    return p[2] + '/' + p[1] + '/' + p[0];
+                }
+
+                // Busca disponibilidade na RPC horarios_livres
+                function loadAvailability() {
+                    if (!useRemote) { resetTime(); return; }
+
+                    var service = serviceSelect ? serviceSelect.value : '';
+                    var professional = professionalSelect ? professionalSelect.value : '';
+                    var data = dateInput ? dateInput.value : '';
+
+                    // Dependências incompletas: mantém estado ocioso
+                    if (!service || !professional || !data) { resetTime(); return; }
+
+                    var duracao = durationOfSelectedService();
+                    var profId = professionalIdOfSelection();
+
+                    // Catálogo ainda não carregou (ou duração/serviço ausente): tenta recarregar
+                    if (!duracao || !profId) {
+                        loadCatalog(function () { loadAvailability(); });
+                        return;
+                    }
+
+                    var token = ++requestToken;
+                    isLoading = true;
+                    setTimeState('loading', TIME_LOADING);
+
+                    supabase
+                        .rpc('horarios_livres', {
+                            p_profissional_id: profId,
+                            p_data: data,
+                            p_duracao: duracao
+                        })
+                        .then(function (res) {
+                            // Descarta respostas obsoletas
+                            if (token !== requestToken) return;
+
+                            if (res.error) {
+                                console.error('[booking] RPC horarios_livres:', res.error);
+                                availableSlots = [];
+                                isLoading = false;
+                                setTimeState('error', TIME_ERROR);
+                                return;
+                            }
+
+                            var rows = Array.isArray(res.data) ? res.data.slice() : [];
+
+                            // Ordenação cronológica explícita pela hora local
+                            rows.sort(function (a, b) {
+                                return String(a.horario).localeCompare(String(b.horario));
+                            });
+
+                            availableSlots = rows;
+                            isLoading = false;
+
+                            if (!rows.length) {
+                                setTimeState('empty', TIME_EMPTY);
+                                return;
+                            }
+
+                            timeSelect.innerHTML = '';
+                            var first = document.createElement('option');
+                            first.value = '';
+                            first.textContent = 'Selecione um horário';
+                            timeSelect.appendChild(first);
+
+                            rows.forEach(function (row) {
+                                var o = document.createElement('option');
+                                o.value = row.horario;
+                                o.textContent = row.horario;
+                                o.dataset.inicio = row.inicio;
+                                o.dataset.fim = row.fim;
+                                timeSelect.appendChild(o);
+                            });
+
+                            timeSelect.disabled = false;
+                            timeSelect.removeAttribute('aria-busy');
+
+                            // Data sem expediente: domingo (ativo = false) retorna zero linhas
+                            console.log(
+                                '[booking] ' + rows.length + ' horário(s) para ' +
+                                friendlyDate(data) + ' | serviço: ' + service +
+                                ' | profissional: ' + professional +
+                                ' | duração: ' + duracao + 'min'
+                            );
+                        })
+                        .catch(function (err) {
+                            if (token !== requestToken) return;
+                            console.error('[booking] falha na rede ao buscar horários:', err);
+                            availableSlots = [];
+                            isLoading = false;
+                            setTimeState('error', TIME_ERROR);
+                        });
+                }
+
+                // Carrega catálogo de serviços e profissionais do banco
+                function loadCatalog(done) {
+                    if (!useRemote) { if (done) done(); return; }
+
+                    if (Object.keys(serviceCatalog).length && Object.keys(proCatalog).length) {
+                        if (done) done();
+                        return;
+                    }
+
+                    supabase
+                        .from('servicos')
+                        .select('id, nome, duracao_min')
+                        .eq('ativo', true)
+                        .order('nome', { ascending: true })
+                        .then(function (sres) {
+                            if (sres.error) {
+                                console.error('[booking] falha ao carregar servicos:', sres.error);
+                            } else {
+                                (sres.data || []).forEach(function (s) {
+                                    serviceCatalog[s.nome] = { id: s.id, duracao_min: s.duracao_min };
+                                });
+                                // Injeta a duração vinda do banco em cada <option>
+                                if (serviceSelect) {
+                                    Array.prototype.forEach.call(serviceSelect.options, function (opt) {
+                                        var rec = serviceCatalog[opt.value];
+                                        if (rec) opt.dataset.dur = rec.duracao_min;
+                                    });
+                                }
+                            }
+                            return supabase
+                                .from('profissionais')
+                                .select('id, nome')
+                                .eq('ativo', true)
+                                .order('nome', { ascending: true });
+                        })
+                        .then(function (pres) {
+                            if (pres && pres.error) {
+                                console.error('[booking] falha ao carregar profissionais:', pres.error);
+                            } else if (pres) {
+                                (pres.data || []).forEach(function (p) {
+                                    proCatalog[p.nome] = { id: p.id, nome: p.nome };
+                                    if (p.nome === 'Sem preferência') semPreferenciaId = p.id;
+                                });
+                            }
+                            if (done) done();
+                        })
+                        .catch(function (err) {
+                            console.error('[booking] falha de rede ao carregar catálogo:', err);
+                            if (done) done();
+                        });
+                }
+
+                // Dependências: serviço / profissional / data invalidam o horário
+                if (serviceSelect) serviceSelect.addEventListener('change', function () {
+                    resetTime();
+                    loadAvailability();
+                });
+                if (professionalSelect) professionalSelect.addEventListener('change', function () {
+                    resetTime();
+                    loadAvailability();
+                });
+
+                // Estado inicial do campo Horário
+                resetTime();
+                if (useRemote) loadCatalog(function () { /* pré-carrega catálogo */ });
+
                 // --------- Validação ---------
                 var validators = {
                     'bk-service': function (el) {
@@ -693,7 +958,20 @@
                         return el.value.trim() !== '' || 'Selecione um profissional.';
                     },
                     'bk-time': function (el) {
-                        return el.value.trim() !== '' || 'Selecione um horário disponível.';
+                        if (el.value.trim() === '') return 'Selecione um horário disponível.';
+                        // Se a lista veio da RPC, o valor precisa existir nos slots liberados.
+                        // Isso impede submissão de um horário que ficou obsoleto.
+                        if (useRemote && availableSlots.length) {
+                            var valido = availableSlots.some(function (s) {
+                                return String(s.horario) === el.value;
+                            });
+                            if (!valido) {
+                                availableSlots = [];
+                                setTimeState('idle', TIME_IDLE);
+                                return 'Selecione um horário disponível.';
+                            }
+                        }
+                        return true;
                     },
                     'bk-date': function (el) {
                         if (!el.value) return 'Escolha uma data válida, a partir de hoje.';
@@ -785,6 +1063,9 @@
                     dateInput.addEventListener('change', function () {
                         var today = toISODate(new Date());
                         if (dateInput.value && dateInput.value < today) dateInput.value = '';
+                        // Recalcula disponibilidade para a nova data
+                        resetTime();
+                        loadAvailability();
                     });
                 }
 
@@ -818,34 +1099,74 @@
 
                     var notes = get('bk-notes') || 'Não informado.';
 
-                    var message = [
-                        BOOKING_CONFIG.greeting,
-                        '',
-                        'Serviço: ' + get('bk-service'),
-                        'Profissional: ' + get('bk-professional'),
-                        'Data: ' + get('bk-date'),
-                        'Horário: ' + get('bk-time'),
-                        'Nome: ' + get('bk-name'),
-                        'WhatsApp: ' + get('bk-phone'),
-                        'Observações: ' + notes
-                    ].join('\n');
+                    // ======================================================
+                    // GRAVAÇÃO NO SUPABASE (Etapa 4)
+                    // ======================================================
+                    if (useRemote) {
+                        var timeOpt = timeSelect.selectedOptions[0];
+                        var inicio = timeOpt ? timeOpt.dataset.inicio : '';
+                        var fim = timeOpt ? timeOpt.dataset.fim : '';
+                        var profId = professionalIdOfSelection();
 
-                    var url = 'https://wa.me/' + BOOKING_CONFIG.whatsappNumber +
-                        '?text=' + encodeURIComponent(message);
+                        supabase
+                            .from('agendamentos')
+                            .insert([{
+                                servico_id: serviceCatalog[get('bk-service')].id,
+                                profissional_id: profId,
+                                inicio: inicio,
+                                fim: fim,
+                                cliente_nome: get('bk-name'),
+                                telefone: get('bk-phone'),
+                                observacoes: notes,
+                                status: 'confirmado'
+                            }])
+                            .then(function (res) {
+                                if (res.error) {
+                                    console.error('[booking] erro ao gravar agendamento:', res.error);
+                                    // Verifica se é conflito (violação de constraint)
+                                    if (res.error.code === '23514' || res.error.message.indexOf('violates check constraint') !== -1) {
+                                        alert('Este horário acabou de ser ocupado. Por favor, escolha outro.');
+                                        loadAvailability(); // recarrega
+                                    } else {
+                                        alert('Ocorreu um erro ao salvar seu agendamento. Tente novamente.');
+                                    }
+                                    return;
+                                }
+                                proceedToWhatsApp();
+                            });
+                    } else {
+                        proceedToWhatsApp();
+                    }
 
-                    window.open(url, '_blank', 'noopener');
+                    function proceedToWhatsApp() {
+                        var message = [
+                            BOOKING_CONFIG.greeting,
+                            '',
+                            'Serviço: ' + get('bk-service'),
+                            'Profissional: ' + get('bk-professional'),
+                            'Data: ' + get('bk-date'),
+                            'Horário: ' + get('bk-time'),
+                            'Nome: ' + get('bk-name'),
+                            'WhatsApp: ' + get('bk-phone'),
+                            'Observações: ' + notes
+                        ].join('\n');
 
-                    // Estado de sucesso
-                    form.classList.add('is-hiding');
-                    var delay = reduceMotion ? 0 : 320;
-                    setTimeout(function () {
-                        form.hidden = true;
-                        form.classList.remove('is-hiding');
-                        success.hidden = false;
-                        // força reflow para garantir a transição de entrada
-                        void success.offsetWidth;
-                        success.classList.add('is-visible');
-                    }, delay);
+                        var url = 'https://wa.me/' + BOOKING_CONFIG.whatsappNumber +
+                            '?text=' + encodeURIComponent(message);
+
+                        window.open(url, '_blank', 'noopener');
+
+                        // Estado de sucesso
+                        form.classList.add('is-hiding');
+                        var delay = reduceMotion ? 0 : 320;
+                        setTimeout(function () {
+                            form.hidden = true;
+                            form.classList.remove('is-hiding');
+                            success.hidden = false;
+                            void success.offsetWidth;
+                            success.classList.add('is-visible');
+                        }, delay);
+                    }
                 });
 
                 // --------- Reenvio ---------

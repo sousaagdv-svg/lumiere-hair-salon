@@ -1,0 +1,1 @@
+import{t as e}from"./modulepreload-polyfill-xcHio9Bv.js";e((()=>{window.LUMIERE_ENV={SUPABASE_URL:`https://exemplo.supabase.co`,SUPABASE_ANON_KEY:`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`}}))();
