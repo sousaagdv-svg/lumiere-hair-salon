@@ -805,7 +805,6 @@
             const frames = new Array(totalFrames);
             let currentFrame = -1;
             let pending = false;
-            let DPR_CAP = 2;   // ajustado mais abaixo conforme a capacidade do aparelho
             const reduceMotion = window.matchMedia
                 ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
                 : false;
@@ -852,9 +851,7 @@
                 const cssH = canvas.clientHeight;
                 if (!cssW || !cssH) return;
 
-                // Em telas 3x um canvas de 100vh estoura memória de vídeo.
-                // O teto de 2 já é o padrão; em modo leve cai para 1.
-                const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
                 const targetW = Math.round(cssW * dpr);
                 const targetH = Math.round(cssH * dpr);
 
@@ -901,7 +898,6 @@
                 const target = Math.min(totalFrames - 1, Math.floor(progress * (totalFrames - 1)));
                 if (target !== currentFrame) {
                     currentFrame = target;
-                    trim(target);
                     render(target);
                 }
             };
@@ -913,36 +909,10 @@
             };
 
             // ---------- Preload inteligente ----------
-            // Em dispositivos fracos a sequência inteira (300 frames) estoura memória
-            // e tempo de CPU. Nesses casos carregamos em janela deslizante e
-            // descartamos frames já muito distantes do cursor.
-            const WEAK = (() => {
-                const cores = navigator.hardwareConcurrency || 0;
-                const mem = navigator.deviceMemory || 0;   // não existe em todo navegador
-                const px = window.innerWidth * window.innerHeight * (window.devicePixelRatio || 1);
-                if (reduceMotion) return true;            // sem animação: nada a carregar
-                if (cores && cores <= 4) return true;
-                if (mem && mem <= 4) return true;
-                if (window.innerWidth < 768 && cores && cores <= 6) return true;
-                if (px > 6e6) return true;                // telas muito grandes
-                return false;
-            })();
-
-            // Canvas de 100vh em modo leve não precisa de nitidez 2x:
-            // cai para 1x e economiza até 75% de memória de vídeo.
-            if (WEAK) DPR_CAP = 1;
-
-            // Quantos frames ficam retidos na memória ao mesmo tempo.
-            const KEEP = WEAK ? 12 : 30;
-            // Janela inicial de preload.
-            const WINDOW = WEAK ? 6 : 25;
-            // Passo do carregamento em blocos.
-            const STEP = WEAK ? 6 : 25;
-
+            const WINDOW = 25;
             const loadFrame = (index) => new Promise((resolve) => {
                 if (frames[index]) return resolve();
                 const img = new Image();
-                img.decoding = 'async';
                 img.onload = () => {
                     frames[index] = img;
                     if (index === 0 && fallbackImg) {
@@ -956,44 +926,16 @@
                 img.src = '/frames/about/frame-' + pad(index + 1) + '.webp';
             });
 
-            // Libera referências de frames distantes para o GC
-            let lastTrim = -1e9;
-            const trim = (center) => {
-                if (!WEAK) return;
-                if (Math.abs(center - lastTrim) < 5) return;
-                lastTrim = center;
-                for (let i = 0; i < totalFrames; i++) {
-                    if (frames[i] && Math.abs(i - center) > KEEP) {
-                        frames[i] = null;
-                    }
-                }
-            };
-
             for (let i = 0; i < WINDOW; i++) loadFrame(i);
 
             let cursor = WINDOW;
-            let loadPaused = false;
-
             const loadRest = () => {
-                if (loadPaused) return;                    // retomado pelo observer
-                const end = Math.min(totalFrames, cursor + STEP);
+                const end = Math.min(totalFrames, cursor + 25);
                 for (let i = cursor; i < end; i++) loadFrame(i);
                 cursor = end;
-                if (cursor < totalFrames) {
-                    setTimeout(loadRest, WEAK ? 260 : 120);
-                }
+                if (cursor < totalFrames) setTimeout(loadRest, 120);
             };
-            setTimeout(loadRest, WEAK ? 400 : 150);
-
-            // Só carrega a sequência quando a seção está perto da viewport.
-            // A seção #about fica muito abaixo da dobra: sem isso, os ~50 MB de
-            // frames começavam a baixar enquanto o usuário ainda lia o Hero.
-            const startIO = new IntersectionObserver((entries) => {
-                const near = entries[0].isIntersecting;
-                loadPaused = !near;
-                if (near) loadRest();
-            }, { rootMargin: '1200px 0px' });
-            startIO.observe(section);
+            setTimeout(loadRest, 150);
 
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', () => {
@@ -1003,9 +945,6 @@
             window.addEventListener('load', onScroll, { once: true });
 
             update();
-
-            // Expõe trim() para quem quiser ajustar o teto de memória.
-            if (WEAK) console.info('[about] modo leve ativo: KEEP=' + KEEP + ' frames em memória');
         });
     </script>
 
@@ -1670,32 +1609,11 @@
                 }
 
                 if (heroBg && !reduceMotionQuery.matches) {
-                    var heroTicking = false;
-                    var heroRaf = function () {
-                        heroTicking = false;
+                    window.addEventListener('scroll', function () {
                         if (window.scrollY > window.innerHeight) return;
                         heroBg.style.transform =
                             'translateY(' + (window.scrollY * 0.15).toFixed(2) + 'px) scale(1.05)';
-                    };
-                    window.addEventListener('scroll', function () {
-                        if (heroTicking) return;
-                        heroTicking = true;
-                        requestAnimationFrame(heroRaf);
                     }, { passive: true });
-                }
-
-                // Vídeo do Hero: pausar fora da viewport evita decodificar
-                // um arquivo de 7 MB sem que ninguém esteja vendo.
-                if (heroBg && typeof IntersectionObserver === 'function') {
-                    var heroVidIO = new IntersectionObserver(function (entries) {
-                        var visible = entries[0].isIntersecting;
-                        if (visible && heroBg.paused) {
-                            heroBg.play().catch(function () { /* autoplay bloqueado */ });
-                        } else if (!visible && !heroBg.paused) {
-                            heroBg.pause();
-                        }
-                    }, { threshold: 0.05 });
-                    heroVidIO.observe(heroBg);
                 }
             } catch (err) {
                 console.warn('[Lumière] header:', err);
