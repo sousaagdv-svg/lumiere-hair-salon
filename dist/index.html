@@ -296,29 +296,30 @@
         </div>
     </section>
 
-    <!-- BRAND STORY / SEQUÊNCIA CINEMATOGRÁFICA CONTROLADA PELO SCROLL -->
-    <!-- A altura de 400vh existe APENAS para fornecer distância de scroll.
-         O conteúdo visual permanece travado em 100vh (sticky). -->
+    <!-- BRAND STORY / SEQUENCIA CINEMATOGRAFICA CONTROLADA PELO SCROLL -->
+    <!-- 400vh existe apenas para fornecer distancia de scroll.
+         O conteudo visual permanece travado em 100vh (sticky).
+         O scroll do usuario mapeia 0..1 -> frame-0001.webp .. frame-0300.webp -->
+        <!-- BRAND STORY / SEQUENCIA CINEMATOGRAFICA CONTROLADA PELO SCROLL -->
+        <!-- BRAND STORY / SEQUENCIA CINEMATOGRAFICA CONTROLADA PELO SCROLL -->
     <section id="about" class="relative bg-[#C47A5C] text-white h-[400vh]">
         <div class="sticky top-0 h-screen w-full overflow-hidden">
 
-            <!-- CAMADA 1 — Sequência de frames ocupando 100% da viewport -->
-            <div class="absolute inset-0">
+            <!-- CANVAS DA ANIMAÇÃO -->
+            <div class="absolute inset-0 w-full h-full">
                 <canvas id="about-sequence-canvas" class="block w-full h-full"></canvas>
-                <!-- Fallback estático: visível enquanto o frame 1 não carrega -->
-                <img id="about-fallback-img" loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1000" alt="Ambiente sofisticado do salão" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none">
             </div>
 
-            <!-- CAMADA 2 — Overlays cinematográficos para legibilidade -->
+            <!-- Overlays cinematográficos para legibilidade -->
             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#A65D3F]/70 via-transparent to-black/25"></div>
 
-            <!-- CAMADA 3 — Conteúdo editorial sobreposto com Motion -->
+            <!-- Conteúdo editorial sobreposto -->
             <div class="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center about-content-wrapper">
                 <div class="max-w-xl lg:max-w-2xl">
 
                     <span class="about-text-layer delay-1 text-[11px] uppercase tracking-[0.25em] text-white/80 font-semibold mb-3 block drop-shadow">
-                        Mais do que un salón
+                        Mais do que um salão
                     </span>
 
                     <h2 class="about-text-layer delay-2 serif-heading text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight mb-6 drop-shadow-md">
@@ -347,160 +348,134 @@
     <style>.about-text-layer{opacity:0;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transform:translateY(20px)}.about-text-layer.is-revealed{opacity:1;transform:translateY(0)}.delay-1{transition-delay:0s}.delay-2{transition-delay:.15s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.45s}@media (prefers-reduced-motion:reduce){.about-text-layer{opacity:1!important;transform:none!important}}</style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const section = document.getElementById('about');
-            const canvas = document.getElementById('about-sequence-canvas');
-            const fallbackImg = document.getElementById('about-fallback-img');
-            const content = document.querySelector('.about-content-wrapper');
+        /* =====================================================================
+           NOVA IMPLEMENTAÇÃO LIMPA DA ANIMAÇÃO DE SCROLL DO #about
+           ===================================================================== */
+        (function () {
+            'use strict';
+
+            var section = document.getElementById('about');
+            var canvas = document.getElementById('about-sequence-canvas');
+            var content = document.querySelector('.about-content-wrapper');
+
             if (!section || !canvas) return;
 
-            const ctx = canvas.getContext('2d');
-            const totalFrames = 300;
-            const frames = new Array(totalFrames);
-            let currentFrame = -1;
-            let pending = false;
-            const reduceMotion = window.matchMedia
-                ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-                : false;
+            var ctx = canvas.getContext('2d', { alpha: false });
+            if (!ctx) return;
 
-            // Com movimento reduzido a sequência não é Worth o custo: fica
-            // apenas a imagem estática que já existe como fallback.
-            if (reduceMotion) {
-                if (fallbackImg) {
-                    fallbackImg.style.opacity = '1';
-                    canvas.style.display = 'none';
-                }
-                if (content) {
-                    content.querySelectorAll('.about-text-layer').forEach(el => el.classList.add('is-revealed'));
-                }
-                return;
+            var TOTAL_FRAMES = 300;
+            var frames = [];
+
+            // Preload de todos os 300 frames
+            for (var i = 0; i < TOTAL_FRAMES; i++) {
+                var img = new Image();
+                img.src = '/frames/about/frame-' + String(i + 1).padStart(4, '0') + '.webp';
+                frames.push(img);
             }
 
-            const pad = (n) => String(n).padStart(4, '0');
+            var MAX_DPR = 2;
+            var dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+            var revealed = false;
 
-            // IntersectionObserver para disparar a entrada do texto
-            const revealObs = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    if (content) {
-                        content.querySelectorAll('.about-text-layer').forEach(el => el.classList.add('is-revealed'));
+            function resizeCanvas() {
+                var w = canvas.clientWidth || section.clientWidth;
+                var h = canvas.clientHeight || section.clientHeight;
+                if (!w || !h) return;
+
+                var pw = Math.round(w * dpr);
+                var ph = Math.round(h * dpr);
+
+                if (canvas.width !== pw || canvas.height !== ph) {
+                    canvas.width = pw;
+                    canvas.height = ph;
+                }
+            }
+
+            function renderFrame(index) {
+                var img = frames[index];
+                if (!img || !img.complete || img.naturalWidth === 0) {
+                    // Fallback para o primeiro frame ou vizinho se não carregou
+                    if (index > 0 && frames[0] && frames[0].complete && frames[0].naturalWidth > 0) {
+                        img = frames[0];
+                    } else {
+                        return;
                     }
-                    revealObs.disconnect();
-                }
-            }, { threshold: 0.2 });
-            revealObs.observe(section);
-
-            // ---------- Render com object-fit: cover, escala de profundidade e nitidez DPI alto ----------
-            const render = (index) => {
-                let frame = frames[index];
-
-                if (!frame) {
-                    for (let d = 1; d <= 20; d++) {
-                        if (frames[index - d]) { frame = frames[index - d]; break; }
-                        if (frames[index + d]) { frame = frames[index + d]; break; }
-                    }
-                }
-                if (!frame) return;
-
-                const cssW = canvas.clientWidth;
-                const cssH = canvas.clientHeight;
-                if (!cssW || !cssH) return;
-
-                const dpr = Math.min(window.devicePixelRatio || 1, 2);
-                const targetW = Math.round(cssW * dpr);
-                const targetH = Math.round(cssH * dpr);
-
-                if (canvas.width !== targetW || canvas.height !== targetH) {
-                    canvas.width = targetW;
-                    canvas.height = targetH;
                 }
 
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                ctx.clearRect(0, 0, cssW, cssH);
+                resizeCanvas();
 
-                // Efeito sutil de profundidade (escala 1.02 -> 1.0)
-                const scaleFactor = 1.02 - (index / (totalFrames - 1)) * 0.02;
+                var w = canvas.width;
+                var h = canvas.height;
+                var imgW = img.naturalWidth;
+                var imgH = img.naturalHeight;
 
-                const scale = Math.max(cssW / (frame.width * scaleFactor), cssH / (frame.height * scaleFactor));
-                const drawW = frame.width * scale * scaleFactor;
-                const drawH = frame.height * scale * scaleFactor;
-                const drawX = (cssW - drawW) / 2;
-                const drawY = (cssH - drawH) / 2;
+                var cover = Math.max(w / imgW, h / imgH);
+                var dw = imgW * cover;
+                var dh = imgH * cover;
+                var dx = (w - dw) / 2;
+                var dy = (h - dh) / 2;
 
-                ctx.drawImage(frame, drawX, drawY, drawW, drawH);
-            };
+                ctx.clearRect(0, 0, w, h);
+                ctx.drawImage(img, dx, dy, dw, dh);
+            }
 
-            // ---------- Progresso real do scroll dentro da seção ----------
-            const update = () => {
-                pending = false;
-
-                const scrollRange = section.offsetHeight - window.innerHeight;
+            function updateFrame() {
+                var rect = section.getBoundingClientRect();
+                var scrollRange = section.offsetHeight - window.innerHeight;
                 if (scrollRange <= 0) return;
 
-                const rect = section.getBoundingClientRect();
-                let progress = -rect.top / scrollRange;
-                progress = progress < 0 ? 0 : (progress > 1 ? 1 : progress);
+                var progress = Math.max(
+                    0,
+                    Math.min(1, -rect.top / scrollRange)
+                );
 
-                // Fade out sutil do texto no terço final da sequência
-                if (content) {
-                    if (progress > 0.75) {
-                        content.style.opacity = Math.max(0, 1 - (progress - 0.75) / 0.2);
-                    } else {
-                        content.style.opacity = 1;
+                var frameIndex = Math.floor(
+                    progress * (TOTAL_FRAMES - 1)
+                );
+                frameIndex = Math.max(0, Math.min(TOTAL_FRAMES - 1, frameIndex));
+
+                renderFrame(frameIndex);
+
+                // Revelação editorial do texto
+                if (!revealed && content && rect.top < window.innerHeight * 0.85) {
+                    revealed = true;
+                    var layers = content.querySelectorAll('.about-text-layer');
+                    for (var j = 0; j < layers.length; j++) {
+                        layers[j].classList.add('is-revealed');
                     }
                 }
+            }
 
-                const target = Math.min(totalFrames - 1, Math.floor(progress * (totalFrames - 1)));
-                if (target !== currentFrame) {
-                    currentFrame = target;
-                    render(target);
-                }
-            };
+            var ticking = false;
 
-            const onScroll = () => {
-                if (pending) return;
-                pending = true;
-                requestAnimationFrame(update);
-            };
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
 
-            // ---------- Preload inteligente ----------
-            const WINDOW = 25;
-            const loadFrame = (index) => new Promise((resolve) => {
-                if (frames[index]) return resolve();
-                const img = new Image();
-                img.onload = () => {
-                    frames[index] = img;
-                    if (index === 0 && fallbackImg) {
-                        fallbackImg.style.opacity = '0';
-                        render(0);
-                        currentFrame = 0;
-                    }
-                    resolve();
-                };
-                img.onerror = () => resolve();
-                img.src = '/frames/about/frame-' + pad(index + 1) + '.webp';
-            });
+                requestAnimationFrame(function () {
+                    updateFrame();
+                    ticking = false;
+                });
+            }
 
-            for (let i = 0; i < WINDOW; i++) loadFrame(i);
+            // Inicialização
+            resizeCanvas();
+            renderFrame(0);
+            onScroll();
 
-            let cursor = WINDOW;
-            const loadRest = () => {
-                const end = Math.min(totalFrames, cursor + 25);
-                for (let i = cursor; i < end; i++) loadFrame(i);
-                cursor = end;
-                if (cursor < totalFrames) setTimeout(loadRest, 120);
-            };
-            setTimeout(loadRest, 150);
-
+            // Único listener de scroll
             window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', () => {
-                currentFrame = -1;
-                update();
-            }, { passive: true });
-            window.addEventListener('load', onScroll, { once: true });
 
-            update();
-        });
+            window.addEventListener('resize', function () {
+                dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+                resizeCanvas();
+                onScroll();
+            }, { passive: true });
+        })();
     </script>
+
+
+
 
     <!-- SEÇÃO FINAL DE AGENDAMENTO -->
     <section id="booking" class="py-24 lg:py-32 bg-[#F9F6F0] relative overflow-hidden">
